@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Auth;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -15,12 +16,10 @@ class LoginController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+       
         return view("Auth.Login");
     }
 
@@ -29,7 +28,24 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request, [
+            'email' =>'required',
+            'password'=> 'required'
+        ]);
+        
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            $request->session()->put('email', $request->email);
+            
+            return redirect()->intended('/');
+        }
+    
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 
     /**
