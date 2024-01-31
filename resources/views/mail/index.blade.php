@@ -1,0 +1,1 @@
+Hello, {{$name}} your one time password is <span style="color: blue"> 123456</span>

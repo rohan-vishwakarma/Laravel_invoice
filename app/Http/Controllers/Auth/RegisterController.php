@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
 use Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\OtpController;
 
 
 // https://kinsta.com/blog/laravel-authentication/
@@ -34,14 +36,20 @@ class RegisterController extends Controller
             "types" =>"required"
         ]);
 
+        $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
         $user = User::create([
             "username"=> $request->username,
             "email"=> $request->email,
             "password"=> bcrypt($request->password),
             "type"=> $request->types,
+            "otp"=> $otp
             ]);
-        Auth::login($user);
-        return redirect(RouteServiceProvider::HOME);
+
+        return redirect()->action([OtpController::class, 'index'])
+            ->with(['username' => $request->username, 'email' => $request->email]);
+
+        // Auth::login($user);
+        //return redirect(RouteServiceProvider::HOME);
 
     }
 
