@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User as UserModel;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -33,12 +34,15 @@ class LoginController extends Controller
             'email' =>'required',
             'password'=> 'required'
         ]);
+
+        $userid = UserModel::where('email', $request->email)->first();
         
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             $request->session()->put('email', $request->email);
+            $request->session()->put('user_id', $userid->id);
             return redirect()->intended('/dashboard');
         }
     

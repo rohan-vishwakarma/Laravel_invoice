@@ -40,4 +40,13 @@ class Customers extends Controller
         ]);
         return redirect()->route('customers')->with('success', 'Customer created successfully.');
     }
+
+
+    public function GetJsonData(){
+
+        $customers = CustomersModel::all();
+        return response()->json($customers);
+
+        
+    }
 }
