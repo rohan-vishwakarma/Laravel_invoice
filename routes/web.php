@@ -9,7 +9,11 @@ use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CustomUiController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Customers\Customers;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\Invoice\Invoice;
+use App\Http\Middleware\CheckSession;
 use App\Mail\webmail;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -39,7 +43,7 @@ Route::get('/otp-verification', [OtpController::class,'index']);
 Route::post('/otp-verification', [OtpController::class,'store']);
 
 
-Route::get('/login', [LoginController::class,'create']);
+Route::get('/login', [LoginController::class,'create'])->name('login');
 Route::post('/login', [LoginController::class,'store']);
 
 
@@ -51,6 +55,22 @@ Route::get('/custom', [CustomUiController::class,'index']);
 Route::post('custom', [CustomUiController::class,'create']);
 
 Route::get('/profile', [UserProfileController::class,'index']);
+
+
+Route::get('/customers', [Customers::class,'index'])->name('customers');
+Route::get('/addcustomers', [Customers::class,'create']);
+Route::post('/addcustomers', [Customers::class,'store']);
+
+
+Route::get('/invoices', [Invoice::class,'index']);
+
+Route::get('/createinvoice', [Invoice::class,'create']);
+Route::post('/createinvoice', [Invoice::class,'store']);
+
+
+
+
+Route::get('/dashboard', [Dashboard::class,'index']);
 
 
 Route::get('/webmail', function() {

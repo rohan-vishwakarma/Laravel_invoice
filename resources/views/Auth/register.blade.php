@@ -43,16 +43,7 @@
           </div>
         </div>
 
-        <div class="form-group row mt-4">
-            <label for="types" class="col-sm-2 col-form-label" style="color: black">TYPE</label>
-            <div class="col-sm-10">
-                <select name="types" class="form-control form-control-sm" id="types">
-                    <option value="COMPANY" @if(old('types') == 'COMPANY') selected @endif>COMPANY</option>
-                    <option value="ADMIN" @if(old('types') == 'ADMIN') selected @endif>ADMIN</option>
-                    <option value="BRANCH" @if(old('types') == 'BRANCH') selected @endif>BRANCH</option>
-                </select>
-            </div>
-        </div>
+        
         
 
         <div class="form-group row mt-4">

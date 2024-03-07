@@ -31,14 +31,14 @@
       <div class="form-group row">
         <label for="staticEmail" class="col-sm-2 col-form-label" style="color: black">Username</label>
         <div class="col-sm-10">
-          <input type="text" name="username" value="{{ old('username', $username) }}" class="form-control form-control-sm" id="staticEmail" >
+          <input type="text" name="username" value="{{ old('username') }}" class="form-control form-control-sm" id="staticEmail" >
         </div>
       </div>
 
       <div class="form-group row mt-4">
             <label for="staticEmail" class="col-sm-2 col-form-label" style="color: black">Email</label>
             <div class="col-sm-10">
-              <input type="text" name="email" value="{{ old('email', $email) }}" class="form-control form-control-sm" id="staticEmail" >
+              <input type="text" name="email" value="{{ old('email') }}" class="form-control form-control-sm" id="staticEmail" >
             </div>
           </div>
 

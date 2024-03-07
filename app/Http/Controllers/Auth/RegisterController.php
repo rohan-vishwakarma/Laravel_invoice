@@ -33,7 +33,6 @@ class RegisterController extends Controller
             "username" =>"required",
             "email"=> "required|email|unique:users",
             "password"=> "required|confirmed|min:8",
-            "types" =>"required"
         ]);
 
         $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
@@ -46,7 +45,7 @@ class RegisterController extends Controller
             ]);
 
         return redirect()->action([OtpController::class, 'index'])
-            ->with(['username' => $request->username, 'email' => $request->email]);
+            ->withInput()->with(['username' => $request->username, 'email' => $request->email]);
 
         // Auth::login($user);
         //return redirect(RouteServiceProvider::HOME);
