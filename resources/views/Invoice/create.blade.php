@@ -26,7 +26,8 @@
     <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 80%;">
 
 
-        <form action="" method="post">
+        <form action="/createinvoice" method="post">
+            @csrf
             <div class="container mt-4 " style="    border: 1px solid #d2c0c3;margin: auto;width: 90%;     border-radius: 7px;">
 
                 <table>
@@ -52,7 +53,7 @@
                              
                             </td>
                             <td colspan="1" ></td>
-                            <td colspan="3"><input type="text" name="invoiceno" placeholder="company name" id="invoiceno" value="{{$company->companyname}}" class="form-control form-control-sm"></td>
+                            <td colspan="3"><input type="text" name="comnpanyname" placeholder="company name" id="invoiceno" value="{{$company->companyname}}" class="form-control form-control-sm"></td>
                         </tr>
                         <tr>
                             <td colspan="3"><input type="text" name="custadd" placeholder="customer address " id="custadd" class="form-control form-control-sm" readonly></td>
@@ -83,12 +84,12 @@
                         </tr>
                         <tr class="rowforcal">
                             <td style="width: 40%;" colspan="4">
-                                <textarea style="width: 100%" placeholder="Item name & Description" type="text"  name="description[]" id="description"></textarea>
+                                <textarea style="width: 100%" placeholder="Item name & Description" type="text"  name="description[]" id="description" required></textarea>
                             </td>
                             <td><input type="text" name="note" id="note"></td>
-                            <td><input type="number" style="width: 100%;" name="quantity[]" id="quantity"></td>
-                            <td><input type="number" style="width: 100%;" name="rate[]" id="rate"></td>
-                            <td><input type="number" name="amount[]" style="width: 100%;" id="amount"></td>
+                            <td><input type="number" style="width: 100%;" name="quantity[]" id="quantity" required></td>
+                            <td><input type="number" style="width: 100%;" name="rate[]" id="rate" required></td>
+                            <td><input type="number" name="amount[]" style="width: 100%;" id="amount" required></td>
                             <td><button type="button" id="add" class="btn btn-info">+</button></td>
                         </tr>
 
@@ -96,7 +97,7 @@
                             <td colspan="5"></td>
                             <td></td>
                             <td>TOTAL: </td>
-                            <td><input type="text" class="form-control form-control-sm" name="total" id="total"></td>
+                            <td><input type="text" class="form-control form-control-sm" name="total" id="total" readonly></td>
                         </tr>
                         <tr>
                             <td colspan="5"></td>
@@ -114,9 +115,9 @@
                         <tr>
                             <td colspan="5"></td>
                             <td></td>
-                            <td>TOATAL TAX: </td>
+                            <td>TOTAL TAX: </td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" name="totaltax" id="totaltax">
+                                <input type="text" class="form-control form-control-sm" name="totaltax" id="totaltax" readonly>
                             </td>
                         </tr>
 
@@ -125,11 +126,15 @@
                             <td colspan="5"></td>
                             <td></td>
                             <td>GRAND TOTAL: </td>
-                            <td><input type="text" class="form-control form-control-sm" name="grandtotal" id="grandtotal"></td>
+                            <td><input type="text" class="form-control form-control-sm" name="grandtotal" id="grandtotal" readonly></td>
                         </tr>
 
                     </tbody>
                 </table>
+
+                <div style="margin: auto; width: 50%">
+                    <button type="submit" class="btn btn-info">Generate</button>
+                </div>
             
             </div>
         </form>

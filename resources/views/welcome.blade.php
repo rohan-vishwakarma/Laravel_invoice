@@ -7,19 +7,12 @@
 
 
 <main class="container-fluid" >
-    <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary" style="margin-top: 2%;">
+    <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary" style="margin-top:2%;">
       <div class="col-lg-12 col-sm-12 px-0">
         <img src="/images/erp.jpg" style="    margin: auto;width: -webkit-fill-available;" alt="erp">
       </div>
       <div>
-        <p style="font-size: 36px; font-size: 36px;
-        position: relative;
-        top: -935px;
-        color: #1e1e1e;
-        background: #efefef;
-    ">Your Business. Your Clients.
-          One Free, Powerful Invoicing Platform.
-          </p>
+        
       </div>
     </div>
   
