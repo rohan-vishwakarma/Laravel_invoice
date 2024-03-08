@@ -27,9 +27,9 @@
     @endif
 
 
-   
+   <div class="row">
     
-      <div class="my-3 p-3 bg-body rounded shadow-sm m-auto w-50">
+      <div class="col-sm-4">
         <h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
 
         @foreach ($users as $user)
@@ -59,8 +59,49 @@
 
         @endforeach
       </div>
-
-   
+      <div class="col-sm-8">
+        <form>
+          <div class="row">
+              <div class="col-sm-4">
+                  <label for="companyname">Company Name</label>
+                  <input type="text" class="form-control form-control-sm" id="companyname" name="companyname">
+              </div>
+              <div class="col-sm-4">
+                  <label for="billingname">Billing Name</label>
+                  <input type="text" class="form-control form-control-sm" id="billingname" name="billingname">
+              </div>
+              <div class="col-sm-4">
+                  <label for="address">Address</label>
+                  <input type="text" class="form-control form-control-sm" id="address" name="address">
+              </div>
+          </div>
+          <div class="row mt-3">
+              <div class="col-sm-4">
+                  <label for="city">City</label>
+                  <input type="text" class="form-control form-control-sm" id="city" name="city">
+              </div>
+              <div class="col-sm-4">
+                  <label for="state">State</label>
+                  <input type="text" class="form-control form-control-sm" id="state" name="state">
+              </div>
+              <div class="col-sm-4">
+                  <label for="country">Country</label>
+                  <input type="text" class="form-control form-control-sm" id="country" name="country">
+              </div>
+          </div>
+          <!-- Add more fields as needed -->
+          <div class="row mt-3">
+              <!-- Example of adding another field -->
+              <div class="col-sm-4">
+                  <label for="phone">Phone</label>
+                  <input type="text" class="form-control form-control-sm" id="phone" name="phone">
+              </div>
+              <!-- Add more fields here -->
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Submit</button>
+      </form>
+      </div>
+    </div>
 </div>
     
 @endsection

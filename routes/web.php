@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\OtpController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CustomUiController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Customers\Customers;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard;
@@ -60,6 +61,9 @@ Route::get('/profile', [UserProfileController::class,'index']);
 Route::get('/customers', [Customers::class,'index'])->name('customers');
 Route::get('/addcustomers', [Customers::class,'create']);
 Route::post('/addcustomers', [Customers::class,'store']);
+
+Route::get('/company', [CompanyController::class,'index']);
+Route::post('/company', [CompanyController::class,'update']);
 
 
 Route::get('/invoices', [Invoice::class,'index']);

@@ -11,7 +11,12 @@
          Dashboard
        </a>
      </li>
-
+     <li>
+       <a href="/company" class="nav-link {{ request()->is('company') || request()->is('addcompany')  ? 'active' : 'link-dark' }}">
+         <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+         Company
+       </a>
+     </li>
      <li>
        <a href="/customers" class="nav-link {{ request()->is('customers') || request()->is('addcustomers')  ? 'active' : 'link-dark' }}">
          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>

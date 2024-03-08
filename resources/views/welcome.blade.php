@@ -6,12 +6,20 @@
 @section('content')
 
 
-<main class="container" >
-    <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary" style="margin-top: 5%">
-      <div class="col-lg-6 px-0">
-        <h1 class="display-4 fst-italic">Enterprise Resource Planning</h1>
-        <p class="lead my-3">We offer all types of projector lampswith service</p>
-        <p class="lead mb-0"><a href="#" class="text-body-emphasis fw-bold">Continue reading...</a></p>
+<main class="container-fluid" >
+    <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary" style="margin-top: 2%;">
+      <div class="col-lg-12 col-sm-12 px-0">
+        <img src="/images/erp.jpg" style="    margin: auto;width: -webkit-fill-available;" alt="erp">
+      </div>
+      <div>
+        <p style="font-size: 36px; font-size: 36px;
+        position: relative;
+        top: -935px;
+        color: #1e1e1e;
+        background: #efefef;
+    ">Your Business. Your Clients.
+          One Free, Powerful Invoicing Platform.
+          </p>
       </div>
     </div>
   
@@ -24,7 +32,6 @@
             <div class="mb-1 text-body-secondary">Nov 12</div>
             <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
             <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-              Continue reading
               <svg class="bi"><use xlink:href="#chevron-right"/></svg>
             </a>
           </div>

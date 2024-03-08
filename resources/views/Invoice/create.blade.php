@@ -17,7 +17,7 @@
 <script src="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.js"></script>
 <link href="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.css" rel="stylesheet">
 
-<main style="margin-top: 4%;">
+<main style="margin-top: 4%; max-height: none">
 
     @include('Layouts.sidebar')
 
@@ -25,17 +25,6 @@
 
     <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 80%;">
 
-
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-2">
-          <button onclick="window.location.href='/createinvoice'" class="btn btn-info">Create Invoice</button>
-        </div>
-        <div class="col-sm-8">
-          
-        </div>
-      </div>
-    </div>
 
         <form action="" method="post">
             <div class="container mt-4 " style="    border: 1px solid #d2c0c3;margin: auto;width: 90%;     border-radius: 7px;">
@@ -46,14 +35,15 @@
                     </thead>
                     <tbody>
                         <tr style="border-bottom: 1px solid;">
-                            <td style="width: 20%;">INV NO:<input type="text" value="{{ $invoiceno}}" name="invoiceno" id="invoiceno" class="form-control form-control-sm"></td>
-                            <td colspan="6" style="width: 80%;"></td>
+                            <td>INV NO:<input type="text" value="{{ $invoiceno}}" name="invoiceno" id="invoiceno" class="form-control form-control-sm"></td>
+                            
                         </tr>
                         <tr>
                             <td>.</td>
                         </tr>
                         <tr>
-                            <td >
+                            <td colspan="4">
+                                <span>To :</span>
                                 <select type="text" name="customername" placeholder="customer name" id="customername" class="form-control form-control-sm">
                                     @foreach ($customers as $cust)
                                         <option value="{{$cust}}">{{$cust}}</option>
@@ -61,23 +51,81 @@
                                 </select>
                              
                             </td>
-                            <td colspan="4" style="width: 40%;"></td>
-                            <td colspan="2"><input type="text" name="invoiceno" placeholder="company name" id="invoiceno" value="{{$company->company}}" class="form-control form-control-sm"></td>
+                            <td colspan="1" ></td>
+                            <td colspan="3"><input type="text" name="invoiceno" placeholder="company name" id="invoiceno" value="{{$company->companyname}}" class="form-control form-control-sm"></td>
                         </tr>
                         <tr>
-                            <td><input type="text" name="custadd" placeholder="customer address " id="custadd" class="form-control form-control-sm" readonly></td>
-                            <td colspan="4"></td>
-                            <td colspan="2"><input type="text" name="address"  value="{{$company->address}}" placeholder="address " id="address" class="form-control form-control-sm"></td>
+                            <td colspan="3"><input type="text" name="custadd" placeholder="customer address " id="custadd" class="form-control form-control-sm" readonly></td>
+                            <td colspan="2"></td>
+                            <td colspan="3"><input type="text" name="address"  value="{{$company->address}}" placeholder="address " id="address" class="form-control form-control-sm"></td>
                         </tr>
                         <tr>
-                            <td><input type="email" name="custemail" placeholder="custemail" id="custemail" class="form-control form-control-sm" readonly></td>
-                            <td colspan="4"></td>
-                            <td colspan="2"><input type="text" name="email" placeholder="email" id="email" class="form-control form-control-sm"></td>
+                            <td colspan="3"><input type="email" name="custemail" placeholder="custemail" id="custemail"  class="form-control form-control-sm" readonly></td>
+                            <td colspan="2"></td>
+                            <td colspan="3"><input type="text" name="email" placeholder="email" id="email" value="{{$company->email}}"  class="form-control form-control-sm"></td>
                         </tr>
                         <tr>
-                            <td><input type="text" name="custgstin" placeholder="custgst in " id="custgstin" class="form-control form-control-sm" readonly></td>
-                            <td colspan="4"></td>
-                            <td colspan="2"><input type="text" name="gstin" placeholder="gst in " id="gstin" class="form-control form-control-sm"></td>
+                            <td colspan="3"><input type="text" name="custgstin" placeholder="custgst in " id="custgstin" class="form-control form-control-sm" readonly></td>
+                            <td colspan="2"></td>
+                            <td colspan="3"><input type="text" name="gstin" placeholder="gst in " id="gstin" value="{{$company->gstin}}"  class="form-control form-control-sm"></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="8" style="visibility: hidden;">pp</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4">Description</td>
+                            <td>Note</td>
+                            <td>Quantity</td>
+                            <td>Rate</td>
+                            <td>Amount</td>
+                        </tr>
+                        <tr class="rowforcal">
+                            <td style="width: 40%;" colspan="4">
+                                <textarea style="width: 100%" placeholder="Item name & Description" type="text"  name="description[]" id="description"></textarea>
+                            </td>
+                            <td><input type="text" name="note" id="note"></td>
+                            <td><input type="number" style="width: 100%;" name="quantity[]" id="quantity"></td>
+                            <td><input type="number" style="width: 100%;" name="rate[]" id="rate"></td>
+                            <td><input type="number" name="amount[]" style="width: 100%;" id="amount"></td>
+                            <td><button type="button" id="add" class="btn btn-info">+</button></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="5"></td>
+                            <td></td>
+                            <td>TOTAL: </td>
+                            <td><input type="text" class="form-control form-control-sm" name="total" id="total"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="5"></td>
+                            <td></td>
+                            <td>TAX: </td>
+                            <td>
+                                <select type="text" class="form-control form-control-sm" name="tax" id="tax">
+                                    <option value="NOGST" selected>NOGST</option>
+                                    <option value="CGST-SGST">CGST-SGST</option>
+                                    <option value="IGST">IGST</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="5"></td>
+                            <td></td>
+                            <td>TOATAL TAX: </td>
+                            <td>
+                                <input type="text" class="form-control form-control-sm" name="totaltax" id="totaltax">
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td colspan="5"></td>
+                            <td></td>
+                            <td>GRAND TOTAL: </td>
+                            <td><input type="text" class="form-control form-control-sm" name="grandtotal" id="grandtotal"></td>
                         </tr>
 
                     </tbody>
@@ -90,27 +138,98 @@
   
   </main>
   <script>
-    $('#customername').editableSelect()
+$(document).ready(function() {
+    // Function to calculate amount
+    function calculateAmount(row) {
+        var quantity = parseFloat(row.find('#quantity').val());
+        var rate = parseFloat(row.find('#rate').val());
+        var amount = quantity * rate;
+        row.find('#amount').val(amount.toFixed(2)); // Set the calculated amount with 2 decimal places
+    }
+
+    // Function to calculate total amount, total tax, and grand total
+    function calculateTotals() {
+        var totalAmount = 0;
+        $('.rowforcal').each(function() {
+            var amount = parseFloat($(this).find('#amount').val());
+            if (!isNaN(amount)) {
+                totalAmount += amount;
+            }
+        });
+        $('#total').val(totalAmount.toFixed(2)); // Set total amount
+
+        var taxRate = 0;
+        var totalTaxType = $('#tax').val();
+        if (totalTaxType === 'CGST-SGST') {
+            taxRate = 0.18; // Assuming 18% CGST-SGST
+        } else if (totalTaxType === 'IGST') {
+            taxRate = 0.18; // Assuming 18% IGST
+        }
+
+        var totalTax = totalAmount * taxRate;
+        $('#totaltax').val(totalTax.toFixed(2)); // Set total tax
+
+        var grandTotal = totalAmount + totalTax;
+        $('#grandtotal').val(grandTotal.toFixed(2)); // Set grand total
+    }
+
+    // Add row
+    $('#add').click(function() {
+        var newRow = $('.rowforcal').first().clone(); // Clone the first row
+        newRow.find('input').val(''); // Clear input values
+        newRow.find('textarea').val(''); // Clear textarea values
+        newRow.find('button').text('-').attr('id', 'remove').removeClass('btn-info').addClass('btn-danger'); // Change button to remove
+        $('.rowforcal:last').after(newRow); // Append the new row after the last row
+    });
+
+    // Remove row
+    $(document).on('click', '#remove', function() {
+        $(this).closest('tr').remove(); // Remove the closest parent row
+        calculateTotals(); // Recalculate totals after removing a row
+    });
+
+    // Calculate amount when quantity or rate changes
+    $(document).on('input', '#quantity, #rate', function() {
+        var row = $(this).closest('tr');
+        calculateAmount(row);
+        calculateTotals(); // Recalculate totals after changing quantity or rate
+    });
+
+    // Recalculate totals when total tax type changes
+    $('#tax').change(function() {
+        calculateTotals();
+    });
+});
+
+
+$('#customername').editableSelect()
     .on('select.editable-select', function (e, li) {
-        $('#last-selected').html(
-     
-            $.ajax({
-                url: '/api/customers',
-                type: 'GET',
-                dataType: 'json',
-                success: function(data){
-                    const d = data.find((item)=>{
-                        if(item.name == li.text()){
-                            $('#custadd').val(item.address);
-                            $('#custemail').val(item.email);
-                            $('#custgstin').val(item.gstin);
-                        }
-                    })
+        $.ajax({
+            url: '/api/customers',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data){
+                const customer = data.find((item) => item.name == li.text());
+                if (customer) {
+                    $('#custadd').val(customer.address);
+                    $('#custemail').val(customer.email);
+                    $('#custgstin').val(customer.gstin);
+                } else {
+                    $('#custadd').val('');
+                    $('#custemail').val('');
+                    $('#custgstin').val('');
+                    alert("Customer not found!");
                 }
-            })
-            
-        );
-    })
+            },
+            error: function(xhr, status, error) {
+                alert("An error occurred while fetching customer data: " + error);
+            }
+        });
+    });
+
+
+    
+
 </script>
 
 

@@ -13,9 +13,10 @@ class UserProfileController extends Controller
     public function index(Request $request){
 
         $session_var = session()->get("email");
-        
         $users = User::where("email","=", $session_var)->get();
         
         return view("Profile.index")->with("users",$users);
     }
+
+
 }

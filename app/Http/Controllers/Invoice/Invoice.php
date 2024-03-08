@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Invoice;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Customers;
 use Illuminate\Http\Request;
 use App\Models\Invoice as InvoiceModel;
@@ -29,7 +30,7 @@ class Invoice extends Controller
             $invoiceno = $select + 1;
         }
         $customers = Customers::pluck('name');  
-        $company = UserModel::where('id', session()->get('user_id'))->first();
+        $company = Company::where('user_id', session()->get('user_id'))->first();
 
         return view("Invoice.create", compact('invoiceno', 'customers', 'company'));
     }

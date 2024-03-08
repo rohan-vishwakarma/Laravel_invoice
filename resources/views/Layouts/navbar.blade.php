@@ -57,7 +57,7 @@
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: darkcyan;" aria-label="Main navigation">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Smart Invoice</a>
+    <a class="navbar-brand" href="/" style="font-family: cursive;color: #41f7e5;">Smart Invoice</a>
     <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -68,22 +68,11 @@
           <a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">HOME</a>
+          <a class="nav-link active" href="/">HOME</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">ABOUT</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Switch account</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
+      
+      
+        
       </ul>
       <form class="d-flex" role="search">
         @if (session()->has('email'))

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Auth;
@@ -43,6 +44,9 @@ class RegisterController extends Controller
             "type"=> $request->types,
             "otp"=> $otp
             ]);
+            $company = new Company();
+            $company->user_id = $user->id;
+            $company->save();
 
         return redirect()->action([OtpController::class, 'index'])
             ->withInput()->with(['username' => $request->username, 'email' => $request->email]);
