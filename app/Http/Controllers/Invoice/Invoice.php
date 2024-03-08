@@ -35,7 +35,6 @@ class Invoice extends Controller
         try {
                 $uid =  session()->get('user_id');
                 $invoiceno = $request->input('invoiceno');
-+
                 $companyname = $request->input('companyname');
                 $cadd = $request->input('address');
                 $cemail = $request->input('email');
@@ -67,16 +66,17 @@ class Invoice extends Controller
                              'quantity'=> $quantity[$i],
                              'rate'=> $rate[$i],
                              'amount'=> $amount[$i],
+                             'user_id'=> $uid
                             ]);
                         $items->save();
                     }
                     $invoice = InvoiceModel::create([
                         'invoiceno'=> $invoiceno,
-                        'companyname'=>$companyname,
+                        'companyname'=> $companyname,
                         'cadd' => $cadd,
                         'cemail' => $cemail,
                         'cgstin' =>$cgstin,
-                        'cuatomername'=>$custname,
+                        'customername'=>$custname,
                         'custadd'=>$custadd,
                         'custemail'=>$custemail,
                         'custgstin'=>$custgstin,

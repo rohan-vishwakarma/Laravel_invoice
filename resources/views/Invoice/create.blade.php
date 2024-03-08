@@ -24,7 +24,12 @@
 
 
     <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 80%;">
-
+        @if (session('success'))
+        <div class="alert alert-success " style="margin: auto; text-align: center">
+            {{ session('success') }}
+        </div>
+    @endif
+    
 
         <form action="/createinvoice" method="post">
             @csrf
@@ -50,10 +55,9 @@
                                         <option value="{{$cust}}">{{$cust}}</option>
                                     @endforeach
                                 </select>
-                             
                             </td>
                             <td colspan="1" ></td>
-                            <td colspan="3"><input type="text" name="comnpanyname" placeholder="company name" id="invoiceno" value="{{$company->companyname}}" class="form-control form-control-sm"></td>
+                            <td colspan="3"><input type="text" name="companyname" placeholder="company name" id="invoiceno" value="{{$company->companyname}}" class="form-control form-control-sm"></td>
                         </tr>
                         <tr>
                             <td colspan="3"><input type="text" name="custadd" placeholder="customer address " id="custadd" class="form-control form-control-sm" readonly></td>
@@ -70,11 +74,9 @@
                             <td colspan="2"></td>
                             <td colspan="3"><input type="text" name="gstin" placeholder="gst in " id="gstin" value="{{$company->gstin}}"  class="form-control form-control-sm"></td>
                         </tr>
-
                         <tr>
                             <td colspan="8" style="visibility: hidden;">pp</td>
                         </tr>
-
                         <tr>
                             <td colspan="4">Description</td>
                             <td>Note</td>
@@ -92,7 +94,6 @@
                             <td><input type="number" name="amount[]" style="width: 100%;" id="amount" required></td>
                             <td><button type="button" id="add" class="btn btn-info">+</button></td>
                         </tr>
-
                         <tr>
                             <td colspan="5"></td>
                             <td></td>
@@ -111,7 +112,6 @@
                                 </select>
                             </td>
                         </tr>
-
                         <tr>
                             <td colspan="5"></td>
                             <td></td>
@@ -120,15 +120,12 @@
                                 <input type="text" class="form-control form-control-sm" name="totaltax" id="totaltax" readonly>
                             </td>
                         </tr>
-
-
                         <tr>
                             <td colspan="5"></td>
                             <td></td>
                             <td>GRAND TOTAL: </td>
                             <td><input type="text" class="form-control form-control-sm" name="grandtotal" id="grandtotal" readonly></td>
                         </tr>
-
                     </tbody>
                 </table>
 
@@ -205,7 +202,6 @@ $(document).ready(function() {
         calculateTotals();
     });
 });
-
 
 $('#customername').editableSelect()
     .on('select.editable-select', function (e, li) {

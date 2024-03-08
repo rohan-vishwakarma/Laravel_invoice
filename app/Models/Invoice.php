@@ -14,6 +14,17 @@ class Invoice extends Model
         'invoiceno',
         'companyname',
         'customername',
+        'cadd',
+        'cemail',
+        'customername',
+        'cgstin',
+        'custadd',
+        'custemail',
+        'custgstin',
+        'amount',
+        'taxamount',
+        'totalamount',
+        'user_id'
     ];
 
 
