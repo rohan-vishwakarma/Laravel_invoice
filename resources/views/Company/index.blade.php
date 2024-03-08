@@ -35,6 +35,16 @@
     </div>
 @endif
 
+@if ($errors->any())
+<div class="alert alert-danger p-0">
+    <ul><li>
+        @foreach ($errors->all() as $error)
+            {{ $error }}
+        @endforeach
+    </li></ul>
+</div>
+@endif
+
 
 <form  method="post" action="/company">
   @csrf

@@ -10,8 +10,10 @@ use App\Models\User as UserModel;
 class Invoice extends Controller
 {
     public function index()
-    {   
-        return view("Invoice.index");
+    {       
+        $uid =  session()->get('user_id');
+        $invoice = InvoiceModel::all()->where('user_id', $uid);
+        return view("Invoice.index", compact('invoice'));
     }
     public function create()
     {
@@ -83,10 +85,11 @@ class Invoice extends Controller
                         'amount' => $total,
                         'taxamount'=> $totaltax,
                         'totalamount'=> $grandtotal,
+                        'balance' => $grandtotal,
                         'user_id' =>  $uid
                     ]);
                     $invoice->save();
-                    return redirect()->back()->with('success','Invoice Generated successfully');
+                    return redirect()->back()->withSuccess('Invoice Generated successfully');
 
         } catch (\Throwable $th) {
             throw $th;
@@ -95,6 +98,7 @@ class Invoice extends Controller
     }
     public function show(string $id)
     {
+        return view('Invoice.show');
     }
 
     public function edit(string $id)

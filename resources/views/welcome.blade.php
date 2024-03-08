@@ -7,16 +7,25 @@
 
 
 <main class="container-fluid" >
-    <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary" style="margin-top:2%;">
-      <div class="col-lg-12 col-sm-12 px-0">
-        <img src="/images/erp.jpg" style="    margin: auto;width: -webkit-fill-available;" alt="erp">
+    <div class="row p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary" style="margin-top:2%;">
+      <div class="col-lg-6 col-sm-6 px-0">
+        <img src="/images/erp.jpg" style=" border-radius: 2%;    margin: auto;width: -webkit-fill-available;" alt="erp">
       </div>
-      <div>
-        
+      <div class="col-sm-6 col-lg-6">
+
+          <div class="mt-4">
+            <p style="font-size: 30px; font-weight: 500; font-family: monospace;">Your Business. Your Clients.
+              </p>
+              <p style="font-size: 25px; font-weight: 500; font-family: monospace;">
+                One Free, Powerful Invoicing Platform.
+              </p>
+          </div>
+
       </div>
+
     </div>
   
-    <div class="row mb-2">
+    <!-- <div class="row mb-2">
       <div class="col-md-6">
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
           <div class="col p-4 d-flex flex-column position-static">
@@ -50,8 +59,24 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   
   </main>
+
+  <style>
+   footer {
+    text-align: center;
+    padding: 5px;
+    background-color: #afdddd;
+    color: #000;
+    font-weight: 600;
+}
+  </style>
+
+  <footer>
+    <small>
+      Copyright © 2023 JD SOFTECH. All Rights Reserved.
+    </small>
+  </footer>
     
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Customers as CustomersModel;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use SebastianBergmann\Type\TrueType;
 
@@ -24,7 +25,7 @@ class Dashboard extends Controller
         }
 
         $customerCount = CustomersModel::count();
-
-        return view("dashboard", compact("customerCount"));
+        $invoiceCount = Invoice::where('user_id', session()->get('user_id'))->count();
+        return view("dashboard", compact("customerCount", "invoiceCount"));
     }
 }

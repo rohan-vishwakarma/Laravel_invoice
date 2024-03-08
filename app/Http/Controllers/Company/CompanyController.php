@@ -33,7 +33,7 @@ class CompanyController extends Controller
             'postal_code' => 'nullable|string|max:20',
             'phone' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
-            'gstin' => 'nullable|string|max:20',
+            'gstin' => 'nullable|string|max:15',
             'currency' => 'nullable|string|max:10',
             'payment_terms' => 'nullable|string|max:255',
             'billing_contact_name' => 'nullable|string|max:255',

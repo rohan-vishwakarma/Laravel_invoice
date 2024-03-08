@@ -12,8 +12,7 @@ class LogoutController extends Controller
     public function destroy(Request $request)
     {
         Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $request->session()->flush();
  
         return redirect('/');
         

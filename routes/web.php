@@ -67,6 +67,7 @@ Route::post('/company', [CompanyController::class,'update']);
 
 
 Route::get('/invoices', [Invoice::class,'index']);
+Route::get('/invoices/show/{id}', [Invoice::class, 'show']);
 
 Route::get('/createinvoice', [Invoice::class,'create']);
 Route::post('/createinvoice', [Invoice::class,'store']);

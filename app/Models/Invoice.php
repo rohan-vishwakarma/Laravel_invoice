@@ -24,6 +24,7 @@ class Invoice extends Model
         'amount',
         'taxamount',
         'totalamount',
+        'balance',
         'user_id'
     ];
 

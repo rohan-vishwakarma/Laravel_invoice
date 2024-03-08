@@ -14,7 +14,9 @@
     @include('Layouts.sidebar')
 
 
-
+<style>
+ 
+</style>
     <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 80%;">
 
 
@@ -23,19 +25,37 @@
         <div class="col-sm-2">
           <button onclick="window.location.href='/createinvoice'" class="btn btn-info">Invoices</button>
         </div>
-        <div class="col-sm-8">
-          <table id="example" class="table table-striped" style="width:100%;     font-size: 12px;">
-            <thead>
+        <div class="col-sm-10">
+          <table id="example" class="table table-striped" style="width:100%;       font-weight: 500;  font-size: 12px;">
+            <thead style="    background: orange;">
                 <tr>
                     <th></th>
-                    <th>Inv</th>
-                    <th>Name</th>
-                    <th>Amount</th>
-                    <th>Tax</th>
-                    <th>Total Amount</th>
+                    <th style="    text-align: left;">Inv</th>
+                    <th style="    text-align: left;">Name</th>
+                    <th style="    text-align: left;">Amount</th>
+                    <th style="    text-align: left;">Tax</th>
+                    <th style="    text-align: left;">Total Amount</th>
+                    <th style="    text-align: left;">Balance</th>
+                    <th style="    text-align: left;">Payments</th>
+                    <th style="    text-align: left;">View</th>
                 </tr>
             </thead>
             <tbody>
+
+                  @foreach ($invoice as $inv)
+                    <tr>
+                      <td><i class="fa fa-list-alt" aria-hidden="true" style="    color: slateblue;"></i>
+                      </td>
+                      <td style="    text-align: left;">{{$inv->invoiceno}}</td>
+                      <td style="    text-align: left;">{{$inv->customername}}</td>
+                      <td style="    text-align: left;">{{$inv->amount}}</td> 
+                      <td style="    text-align: left;">{{$inv->taxamount}}</td>
+                      <td style="    text-align: left;">{{$inv->totalamount}}</td> 
+                      <td style="    text-align: left;">{{$inv->balance}}</td>
+                      <td style="    text-align: left;"><i class="fa  fa-credit-card" style="color: steelblue;" aria-hidden="true"></i></td>
+                      <td style="    text-align: left;"><a href="/invoices/show/{{$inv->id}}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                    </tr>
+                  @endforeach
               
             </tbody>
         </table>
