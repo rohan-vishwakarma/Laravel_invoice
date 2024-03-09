@@ -97,8 +97,13 @@ class Invoice extends Controller
 
     }
     public function show(string $id)
-    {
-        return view('Invoice.show');
+    {   
+        $uid = session()->get('user_id');
+        $company = Company::select('*')->where('user_id', $uid)->first();
+
+        $invoice = InvoiceModel::findOrFail($id);
+        $items = Items::select('*')->where('user_id', $uid)->where('invoiceno', $invoice->invoiceno)->get();
+        return view('Invoice.show', compact('company', 'invoice', 'items'));
     }
 
     public function edit(string $id)

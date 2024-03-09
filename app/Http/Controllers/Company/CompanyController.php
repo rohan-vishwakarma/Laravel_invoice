@@ -45,6 +45,8 @@ class CompanyController extends Controller
             'igst' => 'nullable|numeric',
             'bank_name' => 'nullable|string|max:255',
             'bank_account_number' => 'nullable|string|max:50',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate image upload
+            'stamp' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $company = Company::where('user_id', $user_id)->first();
@@ -74,6 +76,14 @@ class CompanyController extends Controller
         $company->igst = $request->igst;
         $company->bank_name = $request->bank_name;
         $company->bank_account_number = $request->bank_account_number;
+        if ($request->hasFile('logo')) {
+            $logo = file_get_contents($request->file('logo'));
+            $company->logo = $logo;
+        }
+        if ($request->hasFile('stamp')) {
+            $logo = file_get_contents($request->file('stamp'));
+            $company->stamp = $logo;
+        }
         $company->save();
         return redirect()->back()->with('success', 'Company updated successfully.');
     }

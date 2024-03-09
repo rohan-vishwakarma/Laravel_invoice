@@ -31,7 +31,7 @@
        </a>
      </li>
      <li>
-       <a href="/invoices" class="nav-link {{ request()->is('invoices') ? 'active' : 'link-dark' }}">
+       <a href="/invoices" class="nav-link {{ request()->is('invoices') || request()->is('invoices/show/*') ? 'active' : 'link-dark' }}">
          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
          Invoices
        </a>

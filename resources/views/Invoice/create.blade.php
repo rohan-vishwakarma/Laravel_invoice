@@ -22,27 +22,27 @@
     @include('Layouts.sidebar')
 
 
-
     <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 80%;">
+
+        <h2 class="text-center" style="    color: orange;font-family: fantasy;">
+            <i class="fas fa-file-invoice" style="color: sandybrown;margin-right: 23px;"></i>
+            INVOICE GENERATION
+        </h2>
+
         @if (session('success'))
         <div class="alert alert-success " style="margin: auto; text-align: center">
             {{ session('success') }}
         </div>
     @endif
-    
-
         <form action="/createinvoice" method="post">
             @csrf
-            <div class="container mt-4 " style="    border: 1px solid #d2c0c3;margin: auto;width: 90%;     border-radius: 7px;">
-
+            <div class="container mt-1 " style="    border: 1px solid #d2c0c3;margin: auto;width: 90%;     border-radius: 7px;">
                 <table>
-                    <thead>
-                            
+                    <thead>        
                     </thead>
                     <tbody>
                         <tr style="border-bottom: 1px solid;">
                             <td>INV NO:<input type="text" value="{{ $invoiceno}}" name="invoiceno" id="invoiceno" class="form-control form-control-sm"></td>
-                            
                         </tr>
                         <tr>
                             <td>.</td>
@@ -244,7 +244,7 @@ $('#customername').editableSelect()
 <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.1/js/dataTables.bootstrap5.js"></script>
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"> -->
 
 
 

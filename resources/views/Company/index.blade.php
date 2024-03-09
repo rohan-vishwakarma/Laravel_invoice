@@ -46,7 +46,7 @@
 @endif
 
 
-<form  method="post" action="/company">
+<form  method="post" action="/company" enctype="multipart/form-data">
   @csrf
     <div class="container">
       <div class="row">
@@ -56,6 +56,41 @@
       </div>
 
       <div class="row">
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="logo">Logo:</label>
+                <input type="file" class="form-control form-control-sm" id="logo" name="logo">
+                @error('logo')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            @if(isset($company) && $company->logo)
+                <div>
+                    <img src="data:image/png;base64,{{ base64_encode($company->logo) }}" alt="Company Logo" style="max-width: 100px; max-height: 100px;">
+                </div>
+            @endif
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="logo">STAMP:</label>
+                <input type="file" class="form-control form-control-sm" id="stamp" name="stamp">
+                @error('stamp')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            @if(isset($company) && $company->stamp)
+                <div>
+                    <img src="data:image/png;base64,{{ base64_encode($company->stamp) }}" alt="Company Logo" style="max-width: 100px; max-height: 100px;">
+                </div>
+            @endif
+        </div>
+        
+        
+
             <div class="col-sm-4">
                 <label for="companyname">Company Name</label>
                 <input type="text" class="form-control form-control-sm"  value="{{ old('companyname', $company->companyname ?? '') }}" id="companyname" name="companyname">
