@@ -32,6 +32,7 @@
                 <tr>
                     <th></th>
                     <th style="    text-align: left;">Inv</th>
+                    <th style="    text-align: left;">Date</th>
                     <th style="    text-align: left;">Name</th>
                     <th style="    text-align: left;">Amount</th>
                     <th style="    text-align: left;">Tax</th>
@@ -50,6 +51,7 @@
                       <td><i class="fa fa-list-alt" aria-hidden="true" style="    color: slateblue;"></i>
                       </td>
                       <td style="text-align: left;">{{$inv->invoiceno}}</td>
+                      <td style="text-align: left;">{{date('d-M-Y', strtotime($inv->invoicedate))}}</td>
                       <td style="text-align: left;">{{$inv->customername}}</td>
                       <td style="text-align: left;">{{$inv->amount}}</td> 
                       <td style="text-align: left;">{{$inv->taxamount}}</td>
@@ -125,6 +127,9 @@
                     alertify.error('Deletion canceled');
                 });
         }
+
+
+        
  </script>
       
 @endsection

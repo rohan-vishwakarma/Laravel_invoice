@@ -63,7 +63,7 @@
                                         <td style="text-align: left;">
                                             {{ $inv->creditnote ?? '0' }}
                                         </td>
-                                        <td style="text-align: left;">{{ $inv->balance }}</td>
+                                        <td style="text-align: left;" class="balance">{{ $inv->balance }}</td>
                                         <td style="text-align: left;">
                                             <a href="/creditnote/store/{{ $inv->id }}">
                                                 <i class="fa  fa-credit-card" style="color: steelblue;"
@@ -140,7 +140,7 @@
                                             </div>
                                             <div class="col-sm-1">
                                                 <label for="credit_no" class="form-label">Credit no</label>
-                                                <input type="text" class="form-control form-control-sm" id="credit_no" name="credit_no">
+                                                <input type="text" class="form-control form-control-sm" style="color: black; font-weight: 500" value="{{$creditno}}" id="credit_no" name="credit_no">
                                             </div>
                                 
                                             <div class="col-sm-2">
@@ -149,22 +149,22 @@
                                             </div>
                                             <div class="col-sm-2">
                                                 <label for="cgst" class="form-label">CGST</label>
-                                                <input type="number" class="form-control form-control-sm" id="cgst" name="cgst">
+                                                <input type="number" class="form-control form-control-sm" value="0" id="cgst" name="cgst">
                                             </div>
                                             <div class="col-sm-2">
                                                 <label for="sgst" class="form-label">SGST</label>
-                                                <input type="number" class="form-control form-control-sm" id="sgst" name="sgst">
+                                                <input type="number" class="form-control form-control-sm" value="0" id="sgst" name="sgst">
                                             </div>
                                             <div class="col-sm-2">
                                                 <label for="igst" class="form-label">IGST</label>
-                                                <input type="number" class="form-control form-control-sm" id="igst" name="igst">
+                                                <input type="number" class="form-control form-control-sm" value="0" id="igst" name="igst">
                                             </div>
                                         </div>
                                     
                                         <div class="row mb-3">
                                             <div class="col-sm-3">
                                                 <label for="net_amount" class="form-label">Net Amount</label>
-                                                <input type="number" class="form-control form-control-sm" id="net_amount" name="net_amount">
+                                                <input type="number" class="form-control form-control-sm" id="net_amount" name="net_amount" readonly>
                                             </div>
                                             
                                             <div class="col-sm-5">
@@ -172,7 +172,10 @@
                                                 <input class="form-control form-control-sm" id="remark" name="remark">
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <div style="margin: auto; width: max-content;">
+                                            <button type="submit" class="btn btn-info">Submit</button>
+                                        </div>
+                                        
                                     </form>
                                 </div>
                             </div>
@@ -220,5 +223,31 @@
                 "info": false // Disable table information
             });
         });
+
+        function calculateNetAmount() {
+        // Get the values
+        var onAccountReceived = parseFloat(document.getElementById('on_account_received').value);
+        var cgst = parseFloat(document.getElementById('cgst').value);
+        var sgst = parseFloat(document.getElementById('sgst').value);
+        var igst = parseFloat(document.getElementById('igst').value);
+
+        // Calculate net amount
+        var netAmount = onAccountReceived + (onAccountReceived * (cgst + sgst) / 100);
+
+        let balance = document.getElementsByClassName('balance')[0].innerText;
+            console.log(balance);
+
+            
+        document.getElementById('net_amount').value = netAmount.toFixed(2);
+    }
+
+    // Event listeners for input fields
+    document.getElementById('on_account_received').addEventListener('input', calculateNetAmount);
+    document.getElementById('cgst').addEventListener('input', calculateNetAmount);
+    document.getElementById('sgst').addEventListener('input', calculateNetAmount);
+    document.getElementById('igst').addEventListener('input', calculateNetAmount);
+    calculateNetAmount();
+
+
     </script>
 @endsection
