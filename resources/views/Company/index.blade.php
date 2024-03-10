@@ -103,9 +103,14 @@
                 <input type="text" class="form-control form-control-sm" value="{{ old('billingname', $company->billingname ?? '') }}" id="billingname" name="billingname">
                 @error('billingname')
                         <div class="text-danger">{{ $message }}</div>
-                @enderror
-
-        
+                @enderror        
+            </div>
+            <div class="col-sm-4">
+                <label for="invoice_suffix">Invoice Suffix</label>
+                <input type="text" class="form-control form-control-sm" value="{{ old('invoice_suffix', $company->invoice_suffix ?? '') }}" id="invoice_suffix" name="invoice_suffix">
+                @error('invoice_suffix')
+                        <div class="text-danger">{{ $message }}</div>
+                @enderror        
             </div>
             <div class="col-sm-4">
                 <label for="address">Address</label>

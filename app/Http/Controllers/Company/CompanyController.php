@@ -37,6 +37,7 @@ class CompanyController extends Controller
             'currency' => 'nullable|string|max:10',
             'payment_terms' => 'nullable|string|max:255',
             'billing_contact_name' => 'nullable|string|max:255',
+            'invoice_suffix' => 'nullable|string|max:1000',
             'billing_contact_email' => 'nullable|email|max:255',
             'billing_contact_phone' => 'nullable|string|max:20',
             'website' => 'nullable|string|max:255',
@@ -76,6 +77,7 @@ class CompanyController extends Controller
         $company->igst = $request->igst;
         $company->bank_name = $request->bank_name;
         $company->bank_account_number = $request->bank_account_number;
+        $company->invoice_suffix = $request->invoice_suffix;
         if ($request->hasFile('logo')) {
             $logo = file_get_contents($request->file('logo'));
             $company->logo = $logo;

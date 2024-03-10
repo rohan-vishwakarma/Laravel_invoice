@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Creditnote\CreditnoteController;
 use App\Http\Controllers\profile\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -68,11 +69,12 @@ Route::post('/company', [CompanyController::class,'update']);
 
 Route::get('/invoices', [Invoice::class,'index']);
 Route::get('/invoices/show/{id}', [Invoice::class, 'show']);
-
 Route::get('/createinvoice', [Invoice::class,'create']);
 Route::post('/createinvoice', [Invoice::class,'store']);
+Route::post('/deleteinvoice/{id}', [Invoice::class,'destroy']);
 
-
+Route::get('/creditnote', [CreditnoteController::class, 'index']);
+Route::get('/creditnote/store/{id}', [CreditnoteController::class, 'store']);
 
 
 Route::get('/dashboard', [Dashboard::class,'index']);

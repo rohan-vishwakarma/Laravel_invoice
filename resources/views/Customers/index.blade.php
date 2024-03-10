@@ -18,12 +18,12 @@
     <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 80%;">
 
 
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-sm-2">
           <button onclick="window.location.href='/addcustomers'" class="btn btn-info">ADD CUSTOMER</button>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-10">
           <table id="example" class="table table-striped" style="width:100%;     font-size: 12px;">
             <thead>
                 <tr>

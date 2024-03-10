@@ -1,6 +1,6 @@
 @extends('Layouts.master')
 @section('title')
-    Dashboard
+INVOICE GENERATION
 @endsection
 
 @section('content')
@@ -42,7 +42,9 @@
                     </thead>
                     <tbody>
                         <tr style="border-bottom: 1px solid;">
-                            <td>INV NO:<input type="text" value="{{ $invoiceno}}" name="invoiceno" id="invoiceno" class="form-control form-control-sm"></td>
+                            <td>INV NO:<input type="text" value="{{ $invoiceno}}" size="7" name="invoiceno" id="invoiceno" class="form-control form-control-sm" readonly></td>
+                            <td>INV SUFFIX<input type="text" value="{{ $company->invoice_suffix}}" size="7" name="invoice_suffix" id="invoice_suffix" class="form-control form-control-sm" readonly></td>
+                            <td>INV DATE<input type="date" class="form-control form-control-sm" name="invoicedate" value="{{ date('Y-m-d') }}" id="invoicedate"></td>
                         </tr>
                         <tr>
                             <td>.</td>
@@ -88,7 +90,7 @@
                             <td style="width: 40%;" colspan="4">
                                 <textarea style="width: 100%" placeholder="Item name & Description" type="text"  name="description[]" id="description" required></textarea>
                             </td>
-                            <td><input type="text" name="note" id="note"></td>
+                            <td><input type="text" name="note[]" id="note"></td>
                             <td><input type="number" style="width: 100%;" name="quantity[]" id="quantity" required></td>
                             <td><input type="number" style="width: 100%;" name="rate[]" id="rate" required></td>
                             <td><input type="number" name="amount[]" style="width: 100%;" id="amount" required></td>

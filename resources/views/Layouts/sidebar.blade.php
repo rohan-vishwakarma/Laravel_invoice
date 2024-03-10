@@ -1,7 +1,7 @@
 
   
   
-    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light " style="width: 20%; border-right: 1px solid;">
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar" style="width: 20%; border-right: 1px solid;">
    
    <ul class="nav nav-pills flex-column mb-auto">
    
@@ -32,21 +32,15 @@
      </li>
      <li>
        <a href="/invoices" class="nav-link {{ request()->is('invoices') || request()->is('invoices/show/*') ? 'active' : 'link-dark' }}">
-         <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+        <i class="fas fa-file-invoice" style="    font-size: 22px;"> </i>
          Invoices
-       </a>
-     </li>
-     <li>
-       <a href="/products" class="nav-link link-dark">
-         <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-         Products
        </a>
      </li>
 
      <li>
-       <a href="/products" class="nav-link link-dark">
-         <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-         Settings
+       <a href="/creditnote" class="nav-link {{ request()->is('creditnote') || request()->is('creditnote/store/*') ? 'active' : 'link-dark' }}">
+        <i class="fa fa-credit-card" aria-hidden="true"></i>
+         Credit Note
        </a>
      </li>
      <li>

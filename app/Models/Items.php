@@ -11,6 +11,12 @@ class Items extends Model
     protected $table = "items";
 
     protected $fillable = [
-        "invoiceno","description","note","quantity","rate","amount","user_id"
+        "invoiceno",
+        "description",
+        "note",
+        "quantity",
+        "rate",
+        "amount",
+        "user_id"
     ];
 }

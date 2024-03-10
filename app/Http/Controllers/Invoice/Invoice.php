@@ -7,6 +7,9 @@ use App\Models\Items;
 use Illuminate\Http\Request;
 use App\Models\Invoice as InvoiceModel;
 use App\Models\User as UserModel;
+
+
+
 class Invoice extends Controller
 {
     public function index()
@@ -37,6 +40,7 @@ class Invoice extends Controller
         try {
                 $uid =  session()->get('user_id');
                 $invoiceno = $request->input('invoiceno');
+                $invoice_suffix = $request->input('invoice_suffix');
                 $companyname = $request->input('companyname');
                 $cadd = $request->input('address');
                 $cemail = $request->input('email');
@@ -57,6 +61,7 @@ class Invoice extends Controller
                 $tax = $request->input('tax');
                 $totaltax = $request->input('totaltax');
                 $grandtotal = $request->input('grandtotal');
+                $invoicedate = $request->input('invoicedate');
 
                 $invoice = InvoiceModel::select('invoiceno')->where('invoiceno', $invoiceno)->where('user_id' , $uid)->first();
                     
@@ -75,6 +80,8 @@ class Invoice extends Controller
                     $invoice = InvoiceModel::create([
                         'invoiceno'=> $invoiceno,
                         'companyname'=> $companyname,
+                        'invoicedate' => $invoicedate,
+                        'invoice_suffix' => $invoice_suffix,
                         'cadd' => $cadd,
                         'cemail' => $cemail,
                         'cgstin' =>$cgstin,
@@ -83,6 +90,7 @@ class Invoice extends Controller
                         'custemail'=>$custemail,
                         'custgstin'=>$custgstin,
                         'amount' => $total,
+                        'tax' => $tax,
                         'taxamount'=> $totaltax,
                         'totalamount'=> $grandtotal,
                         'balance' => $grandtotal,
@@ -98,6 +106,8 @@ class Invoice extends Controller
     }
     public function show(string $id)
     {   
+        require_once(app_path('Helpers/NumberToWordsHelper.php'));
+        
         $uid = session()->get('user_id');
         $company = Company::select('*')->where('user_id', $uid)->first();
 
@@ -109,11 +119,20 @@ class Invoice extends Controller
     public function edit(string $id)
     {
     }
-
     public function update(Request $request, string $id)
     {
     }
     public function destroy(string $id)
-    {
+    {       
+            $Invoice = InvoiceModel::findOrFail($id)->first();
+            $userid = $Invoice->user_id;
+            $invoiceno =  $Invoice->invoiceno;
+
+            InvoiceModel::destroy($id);
+            Items::where('user_id', $userid)
+                    ->where('invoiceno', $invoiceno)
+                    ->delete();   
+                         
+
     }
 }

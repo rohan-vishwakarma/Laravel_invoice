@@ -12,6 +12,8 @@ class Invoice extends Model
     protected $table = 'invoice';
     protected $fillable = [
         'invoiceno',
+        'invoicedate',
+        'invoice_suffix',
         'companyname',
         'customername',
         'cadd',
@@ -23,6 +25,7 @@ class Invoice extends Model
         'custgstin',
         'amount',
         'taxamount',
+        'tax',
         'totalamount',
         'balance',
         'user_id'

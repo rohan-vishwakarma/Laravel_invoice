@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label for="address" class="form-label">Address</label>
-                    <textarea class="form-control form-control-sm" id="address" value="{{ old('address') }}" name="address" ></textarea>
+                    <textarea class="form-control form-control-sm" id="address" value="" name="address" >{{ old('address') }}</textarea>
                 </div>
                 <div class="col-sm-4">
                     <label for="gstin" class="form-label">GSTIN</label>

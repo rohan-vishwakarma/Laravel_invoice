@@ -17,21 +17,24 @@
         <style>
 
         </style>
-        <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 80%;">
+        <div class="d-flex flex-column outer align-items-stretch flex-shrink-0 break-page " style="width: 80%;">
 
 
 
-            <div class="container outer">
+            <div class="container-fluid outer break-page">
                 <div class="row">
                     <table class="table">
                         <thead>
                             <tr>
-                                <td colspan="4">
+                                <td colspan="3">
                                     <img src="data:image/png;base64,{{ base64_encode($company->logo) }}" alt="Company Logo"
-                                        style="max-width: 100px; max-height: 100px;">
+                                        style="max-width: 150px; max-height: 150px;">
                                 </td>
-                                <td colspan="4" style="text-align: left">
-                                    <h3 class="header">{{ $company->companyname }}</h3>
+                                <td colspan="3" >
+                                    <h3 class="header" style="text-align: center">{{ $company->companyname }}</h3>
+                                </td>
+                                <td colspan="2">
+                                    <img class="gif" src="/images/print.gif" alt="gif" onclick="printinvoice()" style="width: 18%">
                                 </td>
                             </tr>
                             <tr>
@@ -50,7 +53,7 @@
                                 <td colspan="4"><b>CUSTOMER NAME</b>: <span
                                         style="font-size: 15px;">{{ $invoice->customername }} </span></td>
                                 <td colspan="4" style="border-left: 1px solid "><b>INVOICE NO :
-                                        {{ $invoice->invoiceno }}</b></td>
+                                        {{ $invoice->invoiceno }}  {{ $company->invoice_suffix }}</b></td>
                             </tr>
 
                             <tr>
@@ -64,9 +67,9 @@
                                 <td><b>HSN SAC</b></td>
                                 <td colspan="4" style="border-left: 1px solid "></td>
                             </tr>
-                            <tr>
-                                <td><b>SRNO</b></td>
-                                <td colspan="3"><b>DESCRIPTION</b></td>
+                            <tr style="border-bottom: 2px double">
+                                <td style="width: 10%"><b>SRNO</b></td>
+                                <td colspan="3" style="width: 30%"><b>DESCRIPTION</b></td>
                                 <td><b>NOTE</b></td>
                                 <td><b>QUANTITY</b></td>
                                 <td><b>RATE</b></td>
@@ -88,7 +91,7 @@
                             <tr>
                                 <td colspan="6"></td>
                                 <td><b>AMOUNT</b></td>
-                                <td style="font-size: 14px">12343</td>
+                                <td style="font-size: 14px">{{ $invoice->amount }}</td>
                             </tr>
                             <tr>
                                 <td colspan="6"></td>
@@ -96,18 +99,18 @@
                                 <td style="font-size: 14px">{{ $invoice->taxamount }}</td>
                             </tr>
                             <tr>
-                                <td colspan="6"></td>
+                                <td colspan="6" style="font-size: 14px"> <b>Inwords :</b> {{ number_to_words($invoice->totalamount)  }} Only.</td>
                                 <td><b>TOTAL AMOUNT:</b></td>
-                                <td>{{ $invoice->totalamount }}</td>
+                                <td style="font-size: 14px">{{ $invoice->totalamount }}</td>
                             </tr>
                             <tr>
                               <td colspan="6"></td>
                               <td colspan="2">
-                                <img src="data:image/png;base64,{{ base64_encode($company->stamp) }}" alt="Company Logo"
+                                <img src="data:image/png;base64,{{ base64_encode($company->stamp) }}" alt="stamp"
                                         style="max-width: 100px; max-height: 100px;">
                               </td>
                             </tr>
-                            <tr>
+                            <tr style="border-bottom: 1px solid;">
                                 <td colspan="8" style="text-align: center">TERMS & CONDITION :
                                     {{ $company->terms_and_conditions }}</td>
                             </tr>
@@ -141,7 +144,60 @@
     <!-- DataTables Bootstrap 5 CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.bootstrap5.css">
 
+    <style>
+        @media print {
+    .navbar,
+    .sidebar,
+    .gif {
+        display: none !important;
+    }
+
+    .outer, table {
+        width: 100% !important;
+        margin: auto !important;
+    }
+
+    .break-page {
+        page-break-after: always;
+    }
+
+    @page {
+        size: auto; /* Set the page size to auto */
+        orphans: 0; /* Prevent orphans */
+        widows: 0; /* Prevent widows */
+    }
+}
+
+
+
+        @page{
+            width: 100%;
+
+            @top-right {
+                content: "Page " counter(pageNumber);
+            }
+
+            table {
+                display: none;
+            }
+
+            .container-fluid {
+                page-break-after: always;
+                break-after: page;
+                }
+        }
+
+        @page wide {
+        size: a4 portrait;
+        }
+    </style>
+
     <script>
         new DataTable('#example');
+        
+        function printinvoice(){
+            window.print();
+        }
+
     </script>
 @endsection

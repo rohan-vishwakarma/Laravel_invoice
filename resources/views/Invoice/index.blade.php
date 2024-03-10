@@ -1,6 +1,6 @@
 @extends('Layouts.master')
 @section('title')
-    Dashboard
+    Invoice
 @endsection
 
 @section('content')
@@ -8,6 +8,8 @@
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/cdn/ALertify/alertify.min.css">
+
 
 <main style="margin-top: 4%;">
 
@@ -18,7 +20,6 @@
  
 </style>
     <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 80%;">
-
 
     <div class="container">
       <div class="row">
@@ -38,6 +39,8 @@
                     <th style="    text-align: left;">Balance</th>
                     <th style="    text-align: left;">Payments</th>
                     <th style="    text-align: left;">View</th>
+                    <th style="    text-align: left;">Delete</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -46,14 +49,20 @@
                     <tr>
                       <td><i class="fa fa-list-alt" aria-hidden="true" style="    color: slateblue;"></i>
                       </td>
-                      <td style="    text-align: left;">{{$inv->invoiceno}}</td>
-                      <td style="    text-align: left;">{{$inv->customername}}</td>
-                      <td style="    text-align: left;">{{$inv->amount}}</td> 
-                      <td style="    text-align: left;">{{$inv->taxamount}}</td>
-                      <td style="    text-align: left;">{{$inv->totalamount}}</td> 
-                      <td style="    text-align: left;">{{$inv->balance}}</td>
-                      <td style="    text-align: left;"><i class="fa  fa-credit-card" style="color: steelblue;" aria-hidden="true"></i></td>
-                      <td style="    text-align: left;"><a href="/invoices/show/{{$inv->id}}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                      <td style="text-align: left;">{{$inv->invoiceno}}</td>
+                      <td style="text-align: left;">{{$inv->customername}}</td>
+                      <td style="text-align: left;">{{$inv->amount}}</td> 
+                      <td style="text-align: left;">{{$inv->taxamount}}</td>
+                      <td style="text-align: left;">{{$inv->totalamount}}</td> 
+                      <td style="text-align: left;">{{$inv->balance}}</td>
+                      <td style="text-align: left;"><i class="fa  fa-credit-card" style="color: steelblue;" aria-hidden="true"></i></td>
+                      <td style="text-align: left;"><a href="/invoices/show/{{$inv->id}}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                      <td style="text-align: left;">
+                        <button type="button" style="border: none" onclick="confirmDelete({{$inv->id}})">
+                          <i class="fa fa-trash" style="color: red" aria-hidden="true"></i>
+                        </button>
+                        
+                      </td>
                     </tr>
                   @endforeach
               
@@ -83,10 +92,39 @@
 
 <!-- DataTables Bootstrap 5 CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.bootstrap5.css">
-
+<script src="/cdn/Alertify/alertify.min.js"></script>
 <script>
     	
       new DataTable('#example');
+      function confirmDelete(invoiceid) {
+            // Show confirmation dialog
+            alertify.confirm("Confirm Deletion", "Are you sure you want to delete this invoice? ",
+                function () { 
+                    
+                    $.ajax({
+                        url: '/deleteinvoice/' + invoiceid,
+                        method: 'POST',
+                        data: {
+                          _token: '{{ csrf_token() }}',
+                        },
+                        success: function(response) {
+                          alertify.success('Invoice deleted successfully');
+
+                          setTimeout(() => {
+                            window.location.href='/invoices';
+                          }, 2000);
+                        },
+                        error: function(xhr, status, error) {
+
+                          alertify.error('Error occurred while deleting invoice');
+                        }
+                    });
+                    
+                },
+                function () { // If user cancels
+                    alertify.error('Deletion canceled');
+                });
+        }
  </script>
       
 @endsection
