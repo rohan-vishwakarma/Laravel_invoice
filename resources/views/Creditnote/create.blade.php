@@ -13,6 +13,7 @@
     <style>
         label {
             font-size: 12px !important;
+            font-weight: 500
         }
     </style>
 
@@ -57,37 +58,37 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($invoice as $inv)
+                              
                                         <tr>
                                             <td><i class="fa fa-list-alt" aria-hidden="true" style="    color: slateblue;">
-                                                    <input type="text" value="{{ $inv->id }}" name="id" hidden
+                                                    <input type="text" value="{{ $invoice->id }}" name="id" hidden
                                                         id="id">
                                                 </i>
                                             </td>
                                             <td style="text-align: left; width: 10%"> <input type="text"
                                                     style="width: 80%; font-weight: 500; border: hidden" name="invoiceno"
-                                                    step="5" value="{{ $inv->invoiceno}}"
+                                                    step="5" value="{{ $invoice->invoiceno}}"
                                                     id="invoiceno" readonly></td>
-                                            <td style="text-align: left;">{{ $inv->customername }}</td>
-                                            <td style="text-align: left;">{{ $inv->amount }}</td>
-                                            <td style="text-align: left;">{{ $inv->taxamount }}</td>
-                                            <td style="text-align: left;">{{ $inv->totalamount }}</td>
                                             <td style="text-align: left;">
-                                                {{ $inv->creditnote ?? '0' }}
+                                                <input type="text" name="customername" style="border: none" value="{{ $invoice->customername }}" id="customername" readonly>
                                             </td>
-                                            <td style="text-align: left;" class="balance">{{ $inv->balance }}</td>
+                                            <td style="text-align: left;">{{ $invoice->amount }}</td>
+                                            <td style="text-align: left;">{{ $invoice->taxamount }}</td>
+                                            <td style="text-align: left;">{{ $invoice->totalamount }}</td>
                                             <td style="text-align: left;">
-                                                <a href="/creditnote/store/{{ $inv->id }}">
+                                                {{ $invoice->creditnote ?? '0' }}
+                                            </td>
+                                            <td style="text-align: left;" class="balance">{{ $invoice->balance }}</td>
+                                            <td style="text-align: left;">
+                                                <a href="/creditnote/store/{{ $invoice->id }}">
                                                     <i class="fa  fa-credit-card" style="color: steelblue;"
                                                         aria-hidden="true"></i>
                                                 </a>
                                             </td>
-                                            <td style="text-align: left;"><a href="/invoices/show/{{ $inv->id }}"><i
+                                            <td style="text-align: left;"><a href="/invoices/show/{{ $invoice->id }}"><i
                                                         class="fa fa-eye" aria-hidden="true"></i></a></td>
 
                                         </tr>
-                                    @endforeach
-
                                 </tbody>
                             </table>
                         </div>
@@ -98,41 +99,34 @@
                             <thead style="background: #75d7da;">
                                 <tr>
                                     <th></th>
-                                    <th style="text-align: left;">Inv</th>
+                                    <th style="text-align: left;">Credit no</th>
                                     <th style="text-align: left;">Customer Name</th>
-                                    <th style="text-align: left;">Amount</th>
-                                    <th style="text-align: left;">Tax</th>
-                                    <th style="text-align: left;">Total Amount</th>
-                                    <th style="text-align: left;">Credit Amount</th>
-                                    <th style="text-align: left;">Balance</th>
-                                    <th style="text-align: left;">Payments</th>
+                                    <th style="text-align: left;">On account</th>
+                                    <th style="text-align: left;">Tax amount</th>                               
+                                    <th style="text-align: left;">Total</th>
                                     <th style="text-align: left;">View</th>
 
                                 </tr>
                             </thead>
                             <tbody>
+                                
 
-                                @foreach ($invoice as $inv)
+                                @foreach ($creditnoterecords as $cd)
                                     <tr>
                                         <td><i class="fa fa-list-alt" aria-hidden="true" style="    color: slateblue;"></i>
                                         </td>
-                                        <td style="text-align: left;">{{ $inv->invoiceno }}</td>
-                                        <td style="text-align: left;">{{ $inv->customername }}</td>
-                                        <td style="text-align: left;">{{ $inv->amount }}</td>
-                                        <td style="text-align: left;">{{ $inv->taxamount }}</td>
-                                        <td style="text-align: left;">{{ $inv->totalamount }}</td>
+                                        <td style="text-align: left;">{{ $cd->credit_no }}</td>
+                                        <td style="text-align: left;">{{ $cd->customername }}</td>
+                                        <td style="text-align: left;">{{ $cd->on_account_received }}</td>
+                                        <td style="text-align: left;">{{ $cd->cgst + $cd->sgst + $cd->igst  }}</td>
+                                        <td style="text-align: left;">{{ $cd->net_amount }}</td>
+                            
                                         <td style="text-align: left;">
-                                            {{ $inv->creditnote ?? '0' }}
-                                        </td>
-                                        <td style="text-align: left;">{{ $inv->balance }}</td>
-                                        <td style="text-align: left;">
-                                            <a href="/creditnote/store/{{ $inv->id }}">
-                                                <i class="fa  fa-credit-card" style="color: steelblue;"
+                                            <button type="button" style="padding: 0; border: none" onclick="confirmDelete({{$cd->id}})">
+                                                <i class="fa  fa-trash" style="color: steelblue;"
                                                     aria-hidden="true"></i>
-                                            </a>
+                                            </button>
                                         </td>
-                                        <td style="text-align: left;"><a href="/invoices/show/{{ $inv->id }}"><i
-                                                    class="fa fa-eye" aria-hidden="true"></i></a></td>
 
                                     </tr>
                                 @endforeach
@@ -181,7 +175,7 @@
                                             <div class="col-sm-2">
                                                 <label for="igst" class="form-label">IGST</label>
                                                 <input type="number" class="form-control form-control-sm"
-                                                    value="{{ old('igst') }}" id="igst" name="igst">
+                                                    value="{{ old('igst') ? old('igst') : 0 }}" id="igst" name="igst">
                                             </div>
                                         </div>
 
@@ -193,7 +187,6 @@
                                                     value="{{ old('net_amount') ? old('net_amount') : 0 }}"
                                                     name="net_amount" readonly>
                                             </div>
-
                                             <div class="col-sm-5">
                                                 <label for="remark" class="form-label">Remark</label>
                                                 <input class="form-control form-control-sm" id="remark"
@@ -273,7 +266,7 @@
             var igst = parseFloat(document.getElementById('igst').value);
 
             // Calculate net amount
-            var netAmount = onAccountReceived + (onAccountReceived * (cgst + sgst) / 100);
+            var netAmount = onAccountReceived +cgst + sgst + igst;
 
             let balance = document.getElementsByClassName('balance')[0].innerText;
             console.log(balance);
@@ -288,5 +281,39 @@
         document.getElementById('sgst').addEventListener('input', calculateNetAmount);
         document.getElementById('igst').addEventListener('input', calculateNetAmount);
         calculateNetAmount();
+
+        function confirmDelete(invoiceId) {
+
+            alertify.confirm("Confirm Deletion", "Are you sure you want to delete this creditnote? ",
+                function () { // If user confirms
+                    var deleteUrl = '/creditnote/delete/' + invoiceId;
+                    
+                    $.ajax({
+                        url: deleteUrl,
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                        },
+                        success: function(response) {
+                            alertify.set('notifier', 'position', 'top-right');
+                            alertify.success(response.message);
+
+                            setTimeout(() => {
+                                window.location.href=window.location.href;
+                            }, 2000);
+                        },
+                        error: function(xhr, status, error) {
+                            alertify.set('notifier', 'position', 'top-right');
+                            alertify.error('Error occurred while deleting creditnote: ' + xhr.responseText);
+                        }
+                    });
+                    
+                },
+                function () { // If user cancels
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error('Deletion canceled');
+                });
+        }
+
     </script>
 @endsection

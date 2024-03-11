@@ -76,6 +76,8 @@ Route::post('/deleteinvoice/{id}', [Invoice::class,'destroy']);
 Route::get('/creditnote', [CreditnoteController::class, 'index']);
 Route::get('/creditnote/store/{id}', [CreditnoteController::class, 'store']);
 Route::post('/creditnote/add', [CreditnoteController::class, 'add']);
+Route::post('/creditnote/delete/{id}', [CreditnoteController::class, 'delete']);
+
 
 
 

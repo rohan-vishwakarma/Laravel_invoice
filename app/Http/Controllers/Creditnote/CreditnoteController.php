@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Creditnote;
+use Illuminate\Http\Response;
+
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
@@ -26,22 +28,23 @@ class CreditnoteController extends Controller
     public function store(string $id)
     {
 
-        $invoice = Invoice::all()->where('id', $id);
-
+        $invoice = Invoice::where('id', $id)->first();
         $inv = Invoice::find($id);
 
-        $creditnote = CreditnoteModel::where('invoiceno', $inv->invoiceno)
-            ->where('user_id', session()->get('user_id'))
-            ->first(['credit_no']);
-        empty($creditnote) ? $creditno = 1 : $creditno = $creditnote->credit_no + 1;
-        return view('Creditnote.create', compact('invoice', 'creditno'));
+        $creditnoterecords = CreditnoteModel::where('invoiceno', $invoice->invoiceno)->get();
+
+        $creditnote = CreditnoteModel::where('user_id', session()->get('user_id'))
+            ->max('credit_no');
+
+
+        empty($creditnote) ? $creditno = 1 : $creditno = $creditnote + 1;
+
+        return view('Creditnote.create', compact('invoice', 'creditno', 'creditnoterecords'));
     }
 
 
     public function add(Request $request)
     {
-
-        try {
                 $validatedData = $request->validate([
                     'credit_date' => 'required',
                     'id' => 'required',
@@ -57,11 +60,13 @@ class CreditnoteController extends Controller
                     'sgst' => 'required|integer',
                     'igst' => 'required|integer',
                     'net_amount' => 'required',
-                    'remark' => 'required'
+                    'remark' => 'required',
+                    'customername' => 'required'
                 ]);
 
                 $creditNote = new CreditnoteModel();
                 $creditNote->credit_date = $validatedData['credit_date'];
+                $creditNote->customername = $validatedData['customername'];
                 $creditNote->invoice_id = $validatedData['id'];
                 $creditNote->invoiceno = $validatedData['invoiceno'];
                 $creditNote->credit_no = $validatedData['credit_no'];
@@ -83,17 +88,37 @@ class CreditnoteController extends Controller
                         ->where('invoiceno', $validatedData['invoiceno'])
                         ->where('user_id',  session()->get('user_id'))
                         ->increment('creditnote', $validatedData['net_amount']);
+                }else{
+                    return redirect()->back()->with('error', 'Failed to save credit note.');
                 }
                 
 
             return redirect()->back()->with('success', 'Form submitted successfully!');
 
-        } catch (ValidationException $e) {
+    }
 
-            dd($e);
+    public function delete($id)
+    {
+        try {
+           
+            $creditnote = CreditnoteModel::findOrFail($id);
+            $invoiceno = $creditnote->invoiceno;
+            $user_id = $creditnote->user_id;
+            $creditnoteamount = $creditnote->net_amount;
 
-        } catch (\Exception $e) {
-            dd($e);
+
+            DB::table('invoice')->where('user_id', $user_id)
+                                ->where('invoiceno', $invoiceno)
+                                ->increment('balance', $creditnoteamount);
+            DB::table('invoice')->where('user_id', $user_id)
+                                ->where('invoiceno', $invoiceno)
+                                ->decrement('creditnote', $creditnoteamount);
+
+            CreditnoteModel::destroy($id);            
+
+            return response()->json(['message' => 'Credit note deleted successfully'], Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
