@@ -60,7 +60,7 @@
                       <td style="text-align: left;"><i class="fa  fa-credit-card" style="color: steelblue;" aria-hidden="true"></i></td>
                       <td style="text-align: left;"><a href="/invoices/show/{{$inv->id}}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                       <td style="text-align: left;">
-                        <button type="button" style="border: none" onclick="confirmDelete({{$inv->id}})">
+                        <button type="button" style="border: none" onclick="confirmDelete({{$inv->id}})" >
                           <i class="fa fa-trash" style="color: red" aria-hidden="true"></i>
                         </button>
                         
@@ -98,35 +98,36 @@
 <script>
     	
       new DataTable('#example');
-      function confirmDelete(invoiceid) {
-            // Show confirmation dialog
-            alertify.confirm("Confirm Deletion", "Are you sure you want to delete this invoice? ",
-                function () { 
-                    
-                    $.ajax({
-                        url: '/deleteinvoice/' + invoiceid,
-                        method: 'POST',
-                        data: {
-                          _token: '{{ csrf_token() }}',
-                        },
-                        success: function(response) {
-                          alertify.success('Invoice deleted successfully');
-
-                          setTimeout(() => {
-                            window.location.href='/invoices';
-                          }, 2000);
-                        },
-                        error: function(xhr, status, error) {
-
-                          alertify.error('Error occurred while deleting invoice');
-                        }
-                    });
-                    
+      function confirmDelete(invoiceId) {
+    // Show confirmation dialog
+    console.log(invoiceId);
+    alertify.confirm("Confirm Deletion", "Are you sure you want to delete this invoice? ",
+        function () { // If user confirms
+            var deleteUrl = '/deleteinvoice/' + invoiceId;
+            
+            $.ajax({
+                url: deleteUrl,
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
                 },
-                function () { // If user cancels
-                    alertify.error('Deletion canceled');
-                });
-        }
+                success: function(response) {
+                    alertify.success(response.message);
+
+                    setTimeout(() => {
+                        window.location.href='/invoices';
+                    }, 2000);
+                },
+                error: function(xhr, status, error) {
+                    alertify.error('Error occurred while deleting invoice: ' + xhr.responseText);
+                }
+            });
+            
+        },
+        function () { // If user cancels
+            alertify.error('Deletion canceled');
+        });
+}
 
 
         

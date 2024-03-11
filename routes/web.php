@@ -75,6 +75,8 @@ Route::post('/deleteinvoice/{id}', [Invoice::class,'destroy']);
 
 Route::get('/creditnote', [CreditnoteController::class, 'index']);
 Route::get('/creditnote/store/{id}', [CreditnoteController::class, 'store']);
+Route::post('/creditnote/add', [CreditnoteController::class, 'add']);
+
 
 
 Route::get('/dashboard', [Dashboard::class,'index']);
@@ -84,5 +86,5 @@ Route::get('/webmail', function() {
     $name = "Funny Coder";
 
     // The email sending is done using the to method on the Mail facade
-    Mail::to('rohanvishwakarma685@gmail.com')->send(new webmail($name));
+    // Mail::to('rohanvishwakarma685@gmail.com')->send(new webmail($name));
 });

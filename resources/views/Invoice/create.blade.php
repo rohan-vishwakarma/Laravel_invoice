@@ -192,14 +192,12 @@ $(document).ready(function() {
         calculateTotals(); // Recalculate totals after removing a row
     });
 
-    // Calculate amount when quantity or rate changes
     $(document).on('input', '#quantity, #rate', function() {
         var row = $(this).closest('tr');
         calculateAmount(row);
         calculateTotals(); // Recalculate totals after changing quantity or rate
     });
 
-    // Recalculate totals when total tax type changes
     $('#tax').change(function() {
         calculateTotals();
     });
@@ -229,33 +227,14 @@ $('#customername').editableSelect()
             }
         });
     });
-
-
-    
-
 </script>
-
-
-  <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-
-<!-- Bootstrap Bundle (includes Popper) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
-<!-- DataTables -->
 <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.1/js/dataTables.bootstrap5.js"></script>
-<!-- Bootstrap CSS -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"> -->
-
-
-
-<!-- DataTables Bootstrap 5 CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.bootstrap5.css">
-
 <script>
     	
       new DataTable('#example');
  </script>
-      
 @endsection

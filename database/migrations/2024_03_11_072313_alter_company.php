@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-    //     Schema::table("company", function (Blueprint $table) {
-    //         $table->string('tax')->after('amount'); 
-            
-    //     });
+        Schema::table("company", function (Blueprint $table) {
+            $table->string('invoice_suffix')->change()->nullable();
+        });
     }
 
     /**

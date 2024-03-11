@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('creditnote', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('invoiceno');
-            $table->foreign('invoiceno')->references('invoiceno')->on('invoice');
             $table->string('credit_no');
             $table->string('companyname')->nullable();
             $table->string('customername')->nullable();

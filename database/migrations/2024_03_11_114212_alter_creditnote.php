@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-    //     Schema::table("company", function (Blueprint $table) {
-    //         $table->string('tax')->after('amount'); 
-            
-    //     });
+        Schema::table('invoice', function (Blueprint $table) {
+            $table->decimal('creditnote', 12, 2)->change();
+        });
+        
     }
 
     /**

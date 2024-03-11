@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-    //     Schema::table("company", function (Blueprint $table) {
-    //         $table->string('tax')->after('amount'); 
-            
-    //     });
+        Schema::table("creditnote", function (Blueprint $table) {
+            $table->unsignedBigInteger('invoice_id');
+            $table->foreign('invoice_id')->references('id')->on('invoice');
+        });
     }
 
     /**

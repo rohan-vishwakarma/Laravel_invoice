@@ -124,15 +124,21 @@ class Invoice extends Controller
     }
     public function destroy(string $id)
     {       
-            $Invoice = InvoiceModel::findOrFail($id)->first();
-            $userid = $Invoice->user_id;
-            $invoiceno =  $Invoice->invoiceno;
+        try {
+            $invoice = InvoiceModel::findOrFail($id);
+            $userid = $invoice->user_id;
+            $invoiceno = $invoice->invoiceno;
 
             InvoiceModel::destroy($id);
             Items::where('user_id', $userid)
-                    ->where('invoiceno', $invoiceno)
-                    ->delete();   
-                         
+                ->where('invoiceno', $invoiceno)
+                ->delete();   
 
+            return response()->json(['message' => 'Invoice and associated items deleted successfully']);
+        } catch (\Exception $e) {
+            dd($e);
+            return response()->json(['message' => 'Error deleting invoice and associated items: ' . $e->getMessage()], 500);
+        }
     }
+
 }

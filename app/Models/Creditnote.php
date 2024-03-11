@@ -12,14 +12,16 @@ class Creditnote extends Model
     protected $table = 'creditnote';
 
     protected $fillable = [
-        'date',
-        'creditno',
-        'onaccountrecd',
+        'invoiceno',
+        'credit_date',
+        'credit_no',
+        'on_account_received',
         'cgst',
         'sgst',
         'igst',
-        'netamount',
-        'remark'
+        'net_amount',
+        'remark',
+        'invoice_id'
 
     ];
     
