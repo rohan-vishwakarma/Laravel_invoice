@@ -26,15 +26,18 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <td colspan="3">
-                                    <img src="data:image/png;base64,{{ base64_encode($company->logo) }}" alt="Company Logo"
+                                <td colspan="1">
+                                    
+                                </td>
+                                <td colspan="6">
+                                    <div style="margin: auto;width: max-content;">
+                                        <img src="data:image/png;base64,{{ base64_encode($company->logo) }}" alt="Company Logo"
                                         style="max-width: 150px; max-height: 150px;">
+
+                                    </div>
                                 </td>
-                                <td colspan="3" >
-                                    <h3 class="header" style="text-align: center">{{ $company->companyname }}</h3>
-                                </td>
-                                <td colspan="2">
-                                    <img class="gif" src="/images/print.gif" alt="gif" onclick="printinvoice()" style="width: 18%">
+                                <td colspan="1">
+                                    <img class="gif" src="/images/print.gif" alt="gif" onclick="printinvoice()" style="width: 41%">
                                 </td>
                             </tr>
                             <tr>
@@ -68,19 +71,17 @@
                                 <td colspan="4" style="border-left: 1px solid "></td>
                             </tr>
                             <tr style="border-bottom: 2px double">
-                                <td style="width: 10%"><b>SRNO</b></td>
-                                <td colspan="3" style="width: 30%"><b>DESCRIPTION</b></td>
-                                <td><b>NOTE</b></td>
-                                <td><b>QUANTITY</b></td>
-                                <td><b>RATE</b></td>
-                                <td><b>AMOUNT</b></td>
+                                <td style="width: 5%"><b>SRNO</b></td>
+                                <td colspan="4" style="width: 40%"><b>DESCRIPTION</b></td>
+                                <td style="width: 10%;"><b>QUANTITY</b></td>
+                                <td style="width: 10%;"><b>RATE</b></td>
+                                <td style="width: 10%;"><b>AMOUNT</b></td>
                             </tr>
                             @php $a = 1 @endphp
                             @foreach ($items as $item)
                                 <tr>
                                     <td><b>{{ $a }}</b></td>
-                                    <td colspan="3">{{ $item->description }}</td>
-                                    <td>{{ $item->note }}</td>
+                                    <td colspan="4">{{ $item->description }}</td>
                                     <td>{{ $item->quantity }}</td>
                                     <td>{{ $item->rate }}</td>
                                     <td>{{ $item->amount }}</td>
