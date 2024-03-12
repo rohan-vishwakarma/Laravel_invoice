@@ -25,25 +25,34 @@
                 <div class="row">
                     <table class="table">
                         <thead>
-                            <tr>
-                                <td colspan="1">
-                                    
-                                </td>
-                                <td colspan="6">
-                                    <div style="margin: auto;width: max-content;">
-                                        <img src="data:image/png;base64,{{ base64_encode($company->logo) }}" alt="Company Logo"
-                                        style="max-width: 150px; max-height: 150px;">
+                            
 
+                            <tr>
+                                <td colspan="8">
+                                    <div style="    display: flex;">
+                                        <div class="logo" style="width: 13%;">
+                                            <img src="data:image/png;base64,{{ base64_encode($company->logo) }}" alt="Company Logo" style="width: -webkit-fill-available;object-fit: contain;">
+
+                                        </div>
+                                        <div class="middle" style="width: 74%; text-align: center;">
+                                            <h4 style="margin: 0;">TAX INVOICE</h4>
+
+                                        </div>
+                                        <div class="print" style="width: 13%;">
+                                            <img class="gif" src="/images/print.gif" alt="gif" onclick="printinvoice()" style="width: 50%">
+
+                                        </div>
                                     </div>
-                                </td>
-                                <td colspan="1">
-                                    <img class="gif" src="/images/print.gif" alt="gif" onclick="printinvoice()" style="width: 41%">
+
                                 </td>
                             </tr>
-                            <tr>
-                                <td colspan="8"><b>ADDRESS</b> : {{ $invoice->cadd }}</td>
+                            
+                            
+                        
+                            <tr style="border-top: hidden; border-bottom: hidden">
+                                <td colspan="8"><b>ADDRESS</b> : {{ $invoice->cadd }} <b>PINCODE: {{ $invoice->postal_code }}</b> </td>
                             </tr>
-                            <tr>
+                            <tr style="border-top: hidden; border-bottom: hidden">
                                 <td colspan="4"><b>PHONE NO</b>: {{ $company->phone }}</td>
                                 <td colspan="4"><b>EMAIL</b>: {{ $invoice->cemail }}</td>
                             </tr>
@@ -52,21 +61,21 @@
                                 <td colspan="4"><b>GSTIN</b>: {{ $invoice->cgstin }} </td>
                             </tr>
 
-                            <tr>
+                            <tr style=" border-bottom: hidden">
                                 <td colspan="4"><b>CUSTOMER NAME</b>: <span
                                         style="font-size: 15px;">{{ $invoice->customername }} </span></td>
                                 <td colspan="4" style="border-left: 1px solid "><b>INVOICE NO :
                                         {{ $invoice->invoiceno }}  {{ $company->invoice_suffix }}</b></td>
                             </tr>
 
-                            <tr>
-                                <td colspan="4"><b>ADDRESS</b></td>
+                            <tr style=" border-bottom: hidden">
+                                <td colspan="4"><b>ADDRESS : </b>{{ $invoice->custadd }}  </td>
                                 <td colspan="4" style="border-left: 1px solid "><b>DATE: {{ $invoice->invoicedate }}</b>
                                 </td>
                             </tr>
 
                             <tr style="border-bottom: 1px solid">
-                                <td colspan="3"><b>GSTIN</b></td>
+                                <td colspan="3"><b>GSTIN :</b> {{ $invoice->custgstin }}  </td>
                                 <td><b>HSN SAC</b></td>
                                 <td colspan="4" style="border-left: 1px solid "></td>
                             </tr>
@@ -167,6 +176,20 @@
         orphans: 0; /* Prevent orphans */
         widows: 0; /* Prevent widows */
     }
+}
+
+
+.middle , .print{
+    width: 74%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto; /* Ensures full height */
+}
+
+.middle h4 {
+    margin: 0;
 }
 
 

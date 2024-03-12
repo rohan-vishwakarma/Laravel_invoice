@@ -37,8 +37,8 @@
                     <th style="    text-align: left;">Amount</th>
                     <th style="    text-align: left;">Tax</th>
                     <th style="    text-align: left;">Total Amount</th>
+                    <th style="    text-align: left;">Payment Received</th>
                     <th style="    text-align: left;">Balance</th>
-                    <th style="    text-align: left;">Payments</th>
                     <th style="    text-align: left;">View</th>
                     <th style="    text-align: left;">Delete</th>
 
@@ -56,8 +56,8 @@
                       <td style="text-align: left;">{{$inv->amount}}</td> 
                       <td style="text-align: left;">{{$inv->taxamount}}</td>
                       <td style="text-align: left;">{{$inv->totalamount}}</td> 
+                      <td style="text-align: left;">{{$inv->creditnote}}</td>
                       <td style="text-align: left;">{{$inv->balance}}</td>
-                      <td style="text-align: left;"><i class="fa  fa-credit-card" style="color: steelblue;" aria-hidden="true"></i></td>
                       <td style="text-align: left;"><a href="/invoices/show/{{$inv->id}}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                       <td style="text-align: left;">
                         <button type="button" style="border: none" onclick="confirmDelete({{$inv->id}})" >
