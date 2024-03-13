@@ -151,7 +151,7 @@
             </div>
             <div class="col-sm-4">
                 <label for="payment_terms">Payment Terms</label>
-                <input type="text" class="form-control form-control-sm" value="{{ old('payment_terms', $company->payment_terms ?? '') }}" id="payment_terms" name="payment_terms">
+                <textarea type="text" class="form-control form-control-sm" value="" id="payment_terms" name="payment_terms">{{ old('payment_terms', $company->terms_and_conditions ?? '') }}</textarea>
             </div>
             <div class="col-sm-4">
                 <label for="billing_contact_name">Billing Contact Name</label>

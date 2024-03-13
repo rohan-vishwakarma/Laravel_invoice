@@ -100,6 +100,7 @@
                                 <tr>
                                     <th></th>
                                     <th style="text-align: left;">Credit no</th>
+                                    <th style="text-align: left;">Credit date</th>
                                     <th style="text-align: left;">Customer Name</th>
                                     <th style="text-align: left;">On account</th>
                                     <th style="text-align: left;">Tax amount</th>                               
@@ -116,6 +117,7 @@
                                         <td><i class="fa fa-list-alt" aria-hidden="true" style="    color: slateblue;"></i>
                                         </td>
                                         <td style="text-align: left;">{{ $cd->credit_no }}</td>
+                                        <td style="text-align: left;">{{ date('d M Y', strtotime($cd->credit_date)) }}</td>
                                         <td style="text-align: left;">{{ $cd->customername }}</td>
                                         <td style="text-align: left;">{{ $cd->on_account_received }}</td>
                                         <td style="text-align: left;">{{ $cd->cgst + $cd->sgst + $cd->igst  }}</td>
@@ -270,6 +272,18 @@
 
             let balance = document.getElementsByClassName('balance')[0].innerText;
             console.log(balance);
+            console.log(netAmount.toFixed(2));
+
+            if (Number(balance) < Number(netAmount.toFixed(2))) {
+                console.log("Condition met: net amount is greater than balance");
+                alertify.set('notifier', 'position', 'top-center');
+                alertify.error('Net amount should not be greater than balance');
+                $('#on_account_received').val(0);
+                netAmount = 0;
+            } else {
+                console.log("Condition not met: net amount is not greater than balance");
+            }
+            
 
 
             document.getElementById('net_amount').value = netAmount.toFixed(2);

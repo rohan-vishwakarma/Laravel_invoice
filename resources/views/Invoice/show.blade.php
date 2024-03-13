@@ -23,7 +23,7 @@
 
             <div class="container-fluid outer break-page">
                 <div class="row">
-                    <table class="table">
+                    <table class="">
                         <thead>
                             
 
@@ -88,9 +88,12 @@
                             </tr>
                             @php $a = 1 @endphp
                             @foreach ($items as $item)
-                                <tr>
+                                <tr style="    border: 1px solid;">
                                     <td><b>{{ $a }}</b></td>
-                                    <td colspan="4">{{ $item->description }}</td>
+                                    <td colspan="4">
+                                        {{ $item->description }}
+                                        <span style="display: block;"><b>Note</b> : {{ $item->note }}</span>
+                                    </td>
                                     <td>{{ $item->quantity }}</td>
                                     <td>{{ $item->rate }}</td>
                                     <td>{{ $item->amount }}</td>
@@ -99,19 +102,19 @@
                             @endforeach
 
                             <tr>
-                                <td colspan="6"></td>
-                                <td><b>AMOUNT</b></td>
-                                <td style="font-size: 14px">{{ $invoice->amount }}</td>
+                                <td colspan="5"></td>
+                                <td colspan="2" style="border-left: 1px solid;"><b>AMOUNT</b></td>
+                                <td style="font-size: 14px;">{{ $invoice->amount }}</td>
                             </tr>
                             <tr>
-                                <td colspan="6"></td>
-                                <td><b>TAX ({{ $invoice->tax }})</b></td>
-                                <td style="font-size: 14px">{{ $invoice->taxamount }}</td>
+                                <td colspan="5"></td>
+                                <td colspan="2" style="border-left: 1px solid;"><b>TAX ({{ $invoice->tax }})</b></td>
+                                <td style="font-size: 14px; ">{{ $invoice->taxamount }}</td>
                             </tr>
-                            <tr>
-                                <td colspan="6" style="font-size: 14px"> <b>Inwords :</b> {{ number_to_words($invoice->totalamount)  }} Only.</td>
-                                <td><b>TOTAL AMOUNT:</b></td>
-                                <td style="font-size: 14px">{{ $invoice->totalamount }}</td>
+                            <tr style=" border-bottom: 1px solid">
+                                <td colspan="5" style="font-size: 14px"> <b>Inwords :</b> {{ number_to_words($invoice->totalamount)  }} Only.</td>
+                                <td colspan="2" style=" border-bottom: 1px solid;border-left: 1px solid;"><b>TOTAL AMOUNT:</b></td>
+                                <td style="font-size: 14px;  border-bottom: 1px solid">{{ $invoice->totalamount }}</td>
                             </tr>
                             <tr>
                               <td colspan="6"></td>
@@ -162,8 +165,12 @@
         display: none !important;
     }
 
+    td {
+        padding: 4px !important;
+    }
+
     .outer, table {
-        width: 100% !important;
+        width: 98% !important;
         margin: auto !important;
     }
 
@@ -172,7 +179,7 @@
     }
 
     @page {
-        size: auto; /* Set the page size to auto */
+        size: a4 portrait; /* Set the page size to auto */
         orphans: 0; /* Prevent orphans */
         widows: 0; /* Prevent widows */
     }

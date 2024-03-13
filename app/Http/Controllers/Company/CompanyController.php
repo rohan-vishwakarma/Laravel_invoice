@@ -35,7 +35,7 @@ class CompanyController extends Controller
             'email' => 'nullable|email|max:255',
             'gstin' => 'nullable|string|max:15',
             'currency' => 'nullable|string|max:10',
-            'payment_terms' => 'nullable|string|max:255',
+            'payment_terms' => 'nullable|string|max:1000',
             'billing_contact_name' => 'nullable|string|max:255',
             'invoice_suffix' => 'nullable|string|max:1000',
             'billing_contact_email' => 'nullable|email|max:255',
@@ -67,7 +67,7 @@ class CompanyController extends Controller
         $company->email = $request->email;
         $company->gstin = $request->gstin;
         $company->currency = $request->currency;
-        $company->payment_terms = $request->payment_terms;
+        $company->terms_and_conditions = $request->payment_terms;
         $company->billing_contact_name = $request->billing_contact_name;
         $company->billing_contact_email = $request->billing_contact_email;
         $company->billing_contact_phone = $request->billing_contact_phone;

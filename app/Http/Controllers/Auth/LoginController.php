@@ -29,26 +29,32 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-
-        $this->validate($request, [
-            'email' =>'required',
-            'password'=> 'required'
-        ]);
-
-        $userid = UserModel::where('email', $request->email)->first();
-        
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            $request->session()->put('email', $request->email);
-            $request->session()->put('user_id', $userid->id);
-            return redirect()->intended('/dashboard');
-        }
+        try {
+            $this->validate($request, [
+                'email' =>'required',
+                'password'=> 'required'
+            ]);
     
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+            $userid = UserModel::where('email', $request->email)->first();
+            
+            $credentials = $request->only('email', 'password');
+    
+            if (Auth::attempt($credentials)) {
+                $request->session()->regenerate();
+                $request->session()->put('email', $request->email);
+                $request->session()->put('user_id', $userid->id);
+                return redirect()->intended('/dashboard');
+            }
+        
+            return back()->withErrors([
+                'email' => 'The provided credentials do not match our records.',
+            ]);
+        } catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' => $th->getMessage()
+            ]);
+        }
+        
     }
 
     /**
