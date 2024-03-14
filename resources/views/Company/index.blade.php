@@ -49,11 +49,9 @@
 <form  method="post" action="/company" enctype="multipart/form-data">
   @csrf
     <div class="container">
-      <div class="row">
-        <div class="col-sm-2">
-          <button  class="btn btn-info">Company</button>
-        </div>
-      </div>
+        <h2 class="text-center mt-2" style="color: orange;font-family: fantasy;">
+            <i class="fas fa-credit-card" style="color: #646968;margin-right: 23px;"></i>
+COMPANY        </h2>
 
       <div class="row">
 

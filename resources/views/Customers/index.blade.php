@@ -19,11 +19,29 @@
 
 
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-2">
-          <button onclick="window.location.href='/addcustomers'" class="btn btn-info">ADD CUSTOMER</button>
+
+     <div class="row">
+        <div class="col-sm-3">
+         <a href="/addcustomers" style="text-decoration: none">
+          <h5 class="text-center mt-2" style="color: orange;font-family: fantasy;">
+            <i class="fas fa-plus" style="color: #646968;margin-right: 23px;"></i>
+            ADD CUSTOMERS
+          </h5>
+        </a> 
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-6">
+           <h2 class="text-center mt-2" style="color: orange;font-family: fantasy;">
+            <i class="fas fa-credit-card" style="color: #646968;margin-right: 23px;"></i>
+            CUSTOMERS
+        </h2>
+        </div>
+        <div class="col-sm-3">
+
+        </div>
+     </div>
+      <div class="row">
+    
+        <div class="col-sm-12">
           <table id="example" class="table table-striped" style="width:100%;     font-size: 12px;">
             <thead>
                 <tr>

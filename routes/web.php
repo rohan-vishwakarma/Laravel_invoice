@@ -18,6 +18,7 @@ use App\Http\Controllers\Invoice\Invoice;
 use App\Http\Middleware\CheckSession;
 use App\Mail\webmail;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 /*
@@ -34,6 +35,10 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::get('/dashboard', [Dashboard::class,'index']);
 
 
 Route::get('/register', [RegisterController::class,'create']);
@@ -78,11 +83,9 @@ Route::get('/creditnote/store/{id}', [CreditnoteController::class, 'store']);
 Route::post('/creditnote/add', [CreditnoteController::class, 'add']);
 Route::post('/creditnote/delete/{id}', [CreditnoteController::class, 'delete']);
 
-
-
-
-Route::get('/dashboard', [Dashboard::class,'index']);
-
+Route::get('/qrcode', function () {
+    return QrCode::size(200)->generate('https://example.com')->toHtml();
+});
 
 Route::get('/webmail', function() {
     $name = "Funny Coder";

@@ -19,6 +19,11 @@
     @include('Layouts.sidebar')
     <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 80%;">
       <div class="container">
+
+        <h2 class="text-center mt-2" style="color: orange;font-family: fantasy;">
+          <i class="fas fa-credit-card" style="color: #646968;margin-right: 23px;"></i>
+          DASHBOARD
+      </h2>
         <div class="row">
             <div class="col-sm-4">
               <div class="card">
@@ -40,7 +45,7 @@
                   </div>
                   <h5 class="card-title">{{$invoiceCount}} Invoices</h5>
                   <p class="card-text"></p>
-                  <a href="#" class="btn btn-primary">View</a>
+                  <a href="/invoices" class="btn btn-primary">View</a>
                 </div>
               </div>
             </div>

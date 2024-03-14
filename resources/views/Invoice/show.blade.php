@@ -1,6 +1,6 @@
 @extends('Layouts.master')
 @section('title')
-    Dashboard
+    TAX INVOICE
 @endsection
 
 @section('content')
@@ -117,7 +117,10 @@
                                 <td style="font-size: 14px;  border-bottom: 1px solid">{{ $invoice->totalamount }}</td>
                             </tr>
                             <tr>
-                              <td colspan="6"></td>
+                              <td colspan="2">
+                                  {{$qr}}
+                              </td>
+                              <td colspan="4"></td>
                               <td colspan="2">
                                 <img src="data:image/png;base64,{{ base64_encode($company->stamp) }}" alt="stamp"
                                         style="max-width: 100px; max-height: 100px;">

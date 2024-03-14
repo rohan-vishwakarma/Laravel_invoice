@@ -44,8 +44,10 @@
        </a>
      </li>
      <li>
-       <a href="" class="nav-link link-dark">
-         
+      <a href="/profile" class="nav-link {{ request()->is('profile') || request()->is('profile') ? 'active' : 'link-dark' }}">
+        <i class="fa fa-credit-card" aria-hidden="true"></i>
+         Profile
+       </a>
        </a>
      </li>
      <li>

@@ -7,6 +7,8 @@ use App\Models\Items;
 use Illuminate\Http\Request;
 use App\Models\Invoice as InvoiceModel;
 use App\Models\User as UserModel;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 
 
@@ -113,7 +115,10 @@ class Invoice extends Controller
 
         $invoice = InvoiceModel::findOrFail($id);
         $items = Items::select('*')->where('user_id', $uid)->where('invoiceno', $invoice->invoiceno)->get();
-        return view('Invoice.show', compact('company', 'invoice', 'items'));
+
+        $qr = QrCode::size(100)->generate("upi://pay?pa=8108559035@ybl&pn=RohanVishwakarma.com&am=1400&Mam=0&cu=INR");
+
+        return view('Invoice.show', compact('company', 'invoice', 'items', 'qr'));
     }
 
     public function edit(string $id)

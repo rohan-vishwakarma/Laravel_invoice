@@ -22,11 +22,12 @@
     <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 80%;">
 
     <div class="container">
+      <h2 class="text-center mt-2" style="color: orange;font-family: fantasy;">
+        <i class="fas fa-credit-card" style="color: #646968;margin-right: 23px;"></i>
+        INVOICES
+    </h2>
       <div class="row">
-        <div class="col-sm-2">
-          <button onclick="window.location.href='/createinvoice'" class="btn btn-info">Invoices</button>
-        </div>
-        <div class="col-sm-10">
+        <div class="col-sm-12">
           <table id="example" class="table table-striped" style="width:100%;       font-weight: 500;  font-size: 12px;">
             <thead style="    background: orange;">
                 <tr>

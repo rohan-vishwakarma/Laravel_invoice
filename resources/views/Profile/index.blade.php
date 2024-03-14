@@ -1,107 +1,52 @@
-@section('title')
-    LOGIN
-@endsection
 @extends('Layouts.master')
+@section('title')
+    USER PROFILE
+@endsection
 
 @section('content')
 
-<style>
-    input {
-        border: 1px solid black;
-    }
-</style>
+
+<main class="container" style="margin-top: 5%">
+
+  
+</main>
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<div class="container-fluid" style="margin-top: 5%">
-    <h3 style="text-align: center">USER PROFILE</h3>
+<main >
 
-    @if ($errors->any())
-    <div class="alert alert-danger m-auto w-50">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>   
-    @endif
+    @include('Layouts.sidebar')
+    <div class="d-flex flex-column align-items-stretch flex-shrink-0 " style="width: 80%;">
+      <div class="container">
+        <h2 class="text-center mt-2" style="color: orange;font-family: fantasy;">
+          <i class="fas fa-credit-card" style="color: #646968;margin-right: 23px;"></i>
+          USER PROFILE
+      </h2>
+        <div class="row">
 
+          <form>
+            <div class="form-group col-sm-3">
+              <label for="exampleInputEmail1">Username</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" value="{{$users->username}}" placeholder="username" readonly>
+            </div>
 
-   <div class="row">
-    
-      <div class="col-sm-4">
-        <h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
-
-        @foreach ($users as $user)
-        <div class="d-flex text-body-secondary pt-3">
-          <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-          <p class="pb-3 mb-0 small lh-sm border-bottom">
-            <strong class="d-block text-gray-dark">Username : <input type="text" value="{{ $user->company }}" name="username" class="form-control form-control-sm" > </strong>
-          </p>
-        </div>
-
-        <div class="d-flex text-body-secondary pt-3">
-          <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-          <p class="pb-3 mb-0 small lh-sm border-bottom">
-            <strong class="d-block text-gray-dark">Username : <input type="text" value="{{ $user->username }}" name="username" class="form-control form-control-sm" > </strong>
-          </p>
-        </div>
-        <div class="d-flex text-body-secondary pt-3">
-          <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"/><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
-          <p class="pb-3 mb-0 small lh-sm border-bottom">
-            <strong class="d-block text-gray-dark">Email <input type="text" value=" {{ $user->email }}" name="email" class="form-control form-control-sm" ></strong>
-          </p>
-        </div>
-        
-        <small class="d-block text-end mt-3">
-          <a href="#">All updates</a>
-        </small>
-
-        @endforeach
-      </div>
-      <div class="col-sm-8">
-        <form>
-          <div class="row">
-              <div class="col-sm-4">
-                  <label for="companyname">Company Name</label>
-                  <input type="text" class="form-control form-control-sm" id="companyname" name="companyname">
-              </div>
-              <div class="col-sm-4">
-                  <label for="billingname">Billing Name</label>
-                  <input type="text" class="form-control form-control-sm" id="billingname" name="billingname">
-              </div>
-              <div class="col-sm-4">
-                  <label for="address">Address</label>
-                  <input type="text" class="form-control form-control-sm" id="address" name="address">
-              </div>
+            <div class="form-group col-sm-3">
+              <label for="exampleInputPassword1">Email</label>
+              <input type="email" class="form-control" id="email" value="{{$users->email}}"  placeholder="Email" readonly>
+            </div>
+            <div class="form-check">
+            </div>
+            {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
+          </form>
+           
           </div>
-          <div class="row mt-3">
-              <div class="col-sm-4">
-                  <label for="city">City</label>
-                  <input type="text" class="form-control form-control-sm" id="city" name="city">
-              </div>
-              <div class="col-sm-4">
-                  <label for="state">State</label>
-                  <input type="text" class="form-control form-control-sm" id="state" name="state">
-              </div>
-              <div class="col-sm-4">
-                  <label for="country">Country</label>
-                  <input type="text" class="form-control form-control-sm" id="country" name="country">
-              </div>
-          </div>
-          <!-- Add more fields as needed -->
-          <div class="row mt-3">
-              <!-- Example of adding another field -->
-              <div class="col-sm-4">
-                  <label for="phone">Phone</label>
-                  <input type="text" class="form-control form-control-sm" id="phone" name="phone">
-              </div>
-              <!-- Add more fields here -->
-          </div>
-          <button type="submit" class="btn btn-primary mt-3">Submit</button>
-      </form>
-      </div>
+        </div>
     </div>
-</div>
+  
+  </main>
+
+
+
     
 @endsection
