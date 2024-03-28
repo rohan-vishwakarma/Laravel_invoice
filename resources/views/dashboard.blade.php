@@ -24,28 +24,78 @@
           <i class="fas fa-credit-card" style="color: #646968;margin-right: 23px;"></i>
           DASHBOARD
       </h2>
-        <div class="row">
-            <div class="col-sm-4">
+        <div class="row mt-5">
+            
+            <div class="col-sm-3">
               <div class="card">
-                <div class="card-body">
-                  <div>
-                    <i class="fa fa-user" style="    color: salmon;font-size: 41px;" aria-hidden="true"></i>
-                  </div>
-                  <h5 class="card-title">{{$customerCount }}  Customers</h5>
-                  <p class="card-text"></p>
-                  <a href="/customers" class="btn btn-primary">View</a>
+                <div class="">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td colspan="2" style="    background: #caeae8;">
+                          <i class="fa fa-file-invoice" style="color: salmon;font-size: 41px; " aria-hidden="true"></i>
+                          <h5>Invoice Overview</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                       
+                        <td>Total no Invoices:</td>
+                        <td>{{$invoiceCount}}</td>
+                      </tr>
+                      <tr>
+                       
+                        <td>Overall amount:</td>
+                        <td>{{$totaloverallamount}}</td>
+                      </tr>
+                      <tr>
+                        <td>Total Invoice (Today):</td>
+                        <td>{{$TodayinvoiceCount}}</td>
+                      </tr>
+                      <tr>
+                        <td>Total Invoice Amount (Today):</td>
+                        <td>{{$TotalInvoiceAmtOfToday}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <a href="/invoices" class="btn btn-primary">View</a>
+                  
                 </div>
               </div>
             </div>
-            <div class="col-sm-4">
+
+            <div class="col-sm-3">
               <div class="card">
-                <div class="card-body">
-                  <div>
-                    <i class="fa fa-file-invoice" style="    color: salmon;font-size: 41px;" aria-hidden="true"></i>
-                  </div>
-                  <h5 class="card-title">{{$invoiceCount}} Invoices</h5>
-                  <p class="card-text"></p>
+                <div class="">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td colspan="2" style="    background: #caeae8;">
+                          <i class="fa fa-file-invoice" style="color: salmon;font-size: 41px; " aria-hidden="true"></i>
+                          <h5>Credit Overview</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                       
+                        <td>Total CR Note:</td>
+                        <td>{{$totalCreditnote}}</td>
+                      </tr>
+                      <tr>
+                       
+                        <td>Overall amount:</td>
+                        <td>{{$totalcreditamount}}</td>
+                      </tr>
+                      <tr>
+                        <td>Total Credit (Today):</td>
+                        <td>{{$TodayinvoiceCount}}</td>
+                      </tr>
+                      <tr>
+                        <td>Total Credit Amount :</td>
+                        <td>{{$todaycreditamount}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                   <a href="/invoices" class="btn btn-primary">View</a>
+                  
                 </div>
               </div>
             </div>

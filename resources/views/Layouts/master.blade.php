@@ -9,7 +9,7 @@
     @include('Layouts/bootstrap')
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
 </head>
-<body class="bg-body-tertiary"> 
+<body style="background: white"> 
 
     @include('Layouts.navbar')
 
