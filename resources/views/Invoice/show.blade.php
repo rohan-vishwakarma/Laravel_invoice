@@ -25,30 +25,24 @@
                 <div class="row">
                     <table class="">
                         <thead>
-                            
-
                             <tr>
-                                <td colspan="8">
-                                    <div style="    display: flex;">
-                                        <div class="logo" style="width: 13%;">
-                                            <img src="data:image/png;base64,{{ base64_encode($company->logo) }}" alt="Company Logo" style="width: -webkit-fill-available;object-fit: contain;">
-
-                                        </div>
-                                        <div class="middle" style="width: 74%; text-align: center;">
-                                            <h4 style="margin: 0;">TAX INVOICE</h4>
-
-                                        </div>
-                                        <div class="print" style="width: 13%;">
-                                            <img class="gif" src="/images/print.gif" alt="gif" onclick="printinvoice()" style="width: 50%">
-
-                                        </div>
-                                    </div>
-
+                                <td colspan="8" style="border-bottom: hidden">
+                                    <h4 class="text-center">TAX INVOICE</h4>
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="6">
+                                
+                                        <img src="data:image/png;base64,{{ base64_encode($company->logo) }}" alt="Company Logo" style="width: 30%">
+                                </td>
+                                <td colspan="2">
+                                    <img class="gif" src="/images/print.gif" alt="gif" onclick="printinvoice()" style="width: 30%">
+
+                                </td>
+                                
+                            </tr>
+
                             
-                            
-                        
                             <tr style="border-top: hidden; border-bottom: hidden">
                                 <td colspan="8"><b>ADDRESS</b> : {{ $invoice->cadd }} <b>PINCODE: {{ $invoice->postal_code }}</b> </td>
                             </tr>
@@ -161,6 +155,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.bootstrap5.css">
 
     <style>
+        td{
+            padding: 5px
+        }
         @media print {
     .navbar,
     .sidebar,

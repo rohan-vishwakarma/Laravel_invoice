@@ -13,7 +13,7 @@ class OtpController extends Controller
     $username =$request->session()->get('username');;
     $email = $request->session()->get('email');
 
-    return view("Auth.verifyemail", )->with("username", $username)->with("email", $email);
+    return view("Auth.verifyemail")->with("username", $username)->with("email", $email);
   }
 
   public function store(Request $request){

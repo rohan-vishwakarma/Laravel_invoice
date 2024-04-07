@@ -48,11 +48,10 @@ class LoginController extends Controller
         
             return back()->withErrors([
                 'email' => 'The provided credentials do not match our records.',
-            ]);
+            ]); 
         } catch (\Throwable $th) {
-            return back()->withErrors([
-                'error' => $th->getMessage()
-            ]);
+            
+            return redirect()->route('internalservererror');
         }
         
     }

@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Customers\Customers;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Invoice\Invoice;
 use App\Http\Middleware\CheckSession;
@@ -82,6 +83,8 @@ Route::get('/creditnote', [CreditnoteController::class, 'index']);
 Route::get('/creditnote/store/{id}', [CreditnoteController::class, 'store']);
 Route::post('/creditnote/add', [CreditnoteController::class, 'add']);
 Route::post('/creditnote/delete/{id}', [CreditnoteController::class, 'delete']);
+
+Route::get('/internal-server-error', [ErrorController::class,'internalservererror'])->name("internalservererror");
 
 Route::get('/qrcode', function () {
     return QrCode::size(200)->generate('https://example.com')->toHtml();
