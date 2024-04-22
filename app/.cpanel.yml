@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home4/a1622eoz/invoice.waresys.co.in/
+     - /bin/cp -R images $DEPLOYPATH
