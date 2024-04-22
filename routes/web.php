@@ -16,6 +16,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Invoice\Invoice;
+use App\Http\Controllers\Reports\OutstandingController;
 use App\Http\Middleware\CheckSession;
 use App\Mail\webmail;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -85,6 +86,10 @@ Route::post('/creditnote/add', [CreditnoteController::class, 'add']);
 Route::post('/creditnote/delete/{id}', [CreditnoteController::class, 'delete']);
 
 Route::get('/internal-server-error', [ErrorController::class,'internalservererror'])->name("internalservererror");
+
+Route::get('/outstandingreport', [OutstandingController::class,'index'])->name("outstandingreport");
+
+
 
 Route::get('/qrcode', function () {
     return QrCode::size(200)->generate('https://example.com')->toHtml();
